@@ -21,7 +21,7 @@
 // console.log(typeof year); //return number
 // year = null;
 // console.log(typeof year); //return object
-
+//----------------------------------------------------------------------------------------------------
 //Chapter13-let,conost,var
 //use `let` to declare variable that can be changed later
 // let age = 30;
@@ -36,7 +36,7 @@
 
 //let is block scoped
 //var is function scoped
-
+//----------------------------------------------------------------------------------------------------
 //Chapter14-Basic Operators
 // const now = 2047
 // const ageJon = now - 1997;
@@ -65,14 +65,14 @@
 // console.log(isFullAge);
 
 // console.log(now-1991 > now -1990);
-
+//----------------------------------------------------------------------------------------------------
 //Chapter15-Operator Precedence
 // let x, y;
 // x = y = 25-10-5;
 // console.log(x, y);
-
+//----------------------------------------------------------------------------------------------------
 //Coding Challenge
-
+//----------------------------------------------------------------------------------------------------
 //Chapter17-Strings and template literals
 // const firstName = 'Jon';
 // const job = 'teacher';
@@ -93,7 +93,7 @@
 // console.log(`ES6
 // muliple lines
 // is better`);
-
+//----------------------------------------------------------------------------------------------------
 //Chapter18-if/else statement
 // const age = 15;
 // const isOldEnough = age >= 18;
@@ -114,7 +114,7 @@
 // }
 
 // console.log(century);
-
+//----------------------------------------------------------------------------------------------------
 //Chapter20-Type Conversion and Coercion
 
 //type conversion
@@ -138,29 +138,42 @@
 // let n = '1' + 1;
 // n = n - 1;
 // console.log(n); //return 10, 1. '1' + 1 -> 11, 11 - 1 -> 10
-
+//----------------------------------------------------------------------------------------------------
 //Chapter21-Equality Operators: ==(loose equality operator) vs ===(strict equality operator)
-const age = 18;
+// const age = 18;
 
-//always use === for good practice of code
-if(age === 18) console.log('You just became an adult (strict)'); //strict equality operator, return true only if both side equals to true
-//18 === 18 -> true
-//18 === 19 -> false
-//'18' == 18 -> true
-//'18' === 18 -> false
-if(age == 18) console.log('You just became an adult (loose)'); //loose equality operator
+// //always use === for good practice of code
+// if(age === 18) console.log('You just became an adult (strict)'); //strict equality operator, return true only if both side equals to true
+// //18 === 18 -> true
+// //18 === 19 -> false
+// //'18' == 18 -> true
+// //'18' === 18 -> false
+// if(age == 18) console.log('You just became an adult (loose)'); //loose equality operator
 
-const favNumber = prompt("What is your fav number?");
-console.log(favNumber);
-console.log(typeof favNumber); //return string
+// const favNumber = prompt("What is your fav number?");
+// console.log(`Your Favourite number is ${favNumber}`);
+// console.log(typeof favNumber); //return string
 
-if(favNumber == 23) console.log('23 is a great number'); //'23' == 23, loose equality operator
-if(favNumber === 23) console.log('23 is a great number'); //won't return '23 is a great number', since using strict equality operator
+// if(favNumber == 23) console.log('23 is a great number -- loose'); //'23' == 23, loose equality operator
+// if(favNumber === 23) console.log('23 is a great number -- strict'); //won't return '23 is a great number', since using strict equality operator
 
-const leastFavNumber = Number(prompt("What is your least fav number?"));
-console.log(leastFavNumber);
-console.log(typeof leastFavNumber); //return string
-if(leastFavNumber == 7) console.log('7 is not a great number'); //'3' == 3, return the string , loose equality operator
-if(leastFavNumber === 7) console.log('7 is not a great number'); //also return '3 is not a great number', since using strict equality operator
+// const leastFavNumber = Number(prompt("What is your least fav number?"));
+// console.log(leastFavNumber);
+// console.log(typeof leastFavNumber); //return string
+// if(leastFavNumber == 7) console.log('7 is not a great number -- loose'); //'7' == 7, return the string , loose equality operator
+// if(leastFavNumber === 7) console.log('7 is not a great number -- strict'); //also return '3 is not a great number', since using strict equality operator
 
-if(favNumber !== 23) console.log('Why not 23');
+//----------------------------------------------------------------------------------------------------
+//Chapter22-Boolean Logic (AND, OR, NOT)
+//SKIPPED 
+
+//----------------------------------------------------------------------------------------------------
+//Chapter23-Logical Operators
+const hasDriversLicense = true; //A
+const hasGoodVision = true; //B
+
+console.log(hasDriversLicense && hasGoodVision); //true
+console.log(hasDriversLicense || hasGoodVision); //true
+console.log(!hasDriversLicense); //False
+
+
