@@ -1,93 +1,166 @@
-/*****************************
-* Variables and data types
-*/
-/*
-var firstName = 'John';
-console.log(firstName);
+// let js = 'amazing';
+// console.log(40 + 8 /4);
 
-var lastName = 'Smith';
-var age = 28;
+// console.log('Jonas');
 
-var fullAge = true;
-console.log(fullAge);
+// let firstName = 'Jonas';
+// console.log(firstName);
 
-var job;
-console.log(job);
+//Chapter12-Data Types
+// let jsIsFun = true;
+// console.log(jsIsFun);
+// console.log(typeof jsIsFun);
 
-job = 'Teacher';
-console.log(job);
+// jsIsFun = 123;
+// console.log(typeof jsIsFun);
 
-// Variable naming rules
-var _3years = 3;
-var johnMark = 'John and MArk';
-var if = 23;
-*/
+// jsIsFun = "abcs";
+// console.log(typeof jsIsFun);
 
+// let year = 2020;
+// console.log(typeof year); //return number
+// year = null;
+// console.log(typeof year); //return object
 
+//Chapter13-let,conost,var
+//use `let` to declare variable that can be changed later
+// let age = 30;
+// age = 31;
 
-/*****************************
-* Variable mutation and type coercion
-*/
-/*
-var firstName = 'John';
-var age = 28;
+//`var` is legacy code, should avoid using
 
-// Type coercion
-console.log(firstName + ' ' + age);
+//use `const` to delcare variable that are not supposed to change in the future
+// const birthYear = 1991;
+//birthYear = 1990; //won't work 
+//const job; //not legal, can't be null, must have a initial value
 
-var job, isMarried;
-job = 'teacher';
-isMarried = false;
+//let is block scoped
+//var is function scoped
 
-console.log(firstName + ' is a ' + age + ' year old ' + job + '. Is he married? ' + isMarried);
+//Chapter14-Basic Operators
+// const now = 2047
+// const ageJon = now - 1997;
+// const ageSarah = now - 1999;
+// console.log(ageJon, ageSarah);
+// console.log(ageJon/2, ageJon*2);
+// console.log(106**3); //2 to the power of 3
 
-// Variable mutation
-age = 'twenty eight';
-job = 'driver';
+// const firstName = 'Jon';
+// const lastName = 'Upper';
+// console.log(firstName + ' ' + lastName);
 
-alert(firstName + ' is a ' + age + ' year old ' + job + '. Is he married? ' + isMarried);
+// + is processed before =, operator precedence
+// let x = 10 + 5;
+// console.log(x); //15
+// x += 10;
+// console.log(x); //25
+// x++;
+// x--;
 
-var lastName = prompt('What is his last Name?');
-console.log(firstName + ' ' + lastName);
-*/
+//comparison operators
+// console.log(ageJon > ageSarah); // >, <, >=, <=
+// console.log(ageSarah >= 18);
 
+// const isFullAge = ageSarah >=18;
+// console.log(isFullAge);
 
+// console.log(now-1991 > now -1990);
 
-/*****************************
-* Basic operators
-*/
-/*
-var year, yearJohn, yearMark;
-now = 2018;
-ageJohn = 28;
-ageMark = 33;
+//Chapter15-Operator Precedence
+// let x, y;
+// x = y = 25-10-5;
+// console.log(x, y);
 
-// Math operators
-yearJohn = now - ageJohn;
-yeahMark = now - ageMark;
+//Coding Challenge
 
-console.log(yearJohn);
+//Chapter17-Strings and template literals
+// const firstName = 'Jon';
+// const job = 'teacher';
+// const year = 2048;
+// const birthYear = 1991;
 
-console.log(now + 2);
-console.log(now * 2);
-console.log(now / 10);
+// const jonas = "I'm " + firstName + ', a ' + (year - birthYear) + ' teacher.';
+// console.log(jonas);
 
+// //***ES6 feature, without using single or double quote, instead using backticks and placeholders as follow
+// const jonasNew = `I'm ${firstName}, a ${year - birthYear} year old ${job}`;
+// console.log(jonasNew);
 
-// Logical operators
-var johnOlder = ageJohn < ageMark;
-console.log(johnOlder);
+// console.log('(Legacy) String with \n\
+// multiple line \n\
+// lines');
 
+// console.log(`ES6
+// muliple lines
+// is better`);
 
-// typeof operator
-console.log(typeof johnOlder);
-console.log(typeof ageJohn);
-console.log(typeof 'Mark is older tha John');
-var x;
-console.log(typeof x);
-*/
+//Chapter18-if/else statement
+// const age = 15;
+// const isOldEnough = age >= 18;
 
+// if(age >= 18){
+//     console.log('Driving license');
+// }else{
+//     const yearsLeft = 18 - age;
+//     console.log(`Wait another ${yearsLeft} years...`);
+// }
 
+// let century;
+// const birthYear = 1991;
+// if(birthYear <= 2000){
+//      century = 20;
+// }else{
+//      century = 21;
+// }
 
-/*****************************
-* Operator precedence
-*/
+// console.log(century);
+
+//Chapter20-Type Conversion and Coercion
+
+//type conversion
+// const inputYear = '1991';
+// console.log(inputYear + 18); //return 199118
+// console.log(Number(inputYear) + 18); //type conversion, return 2009
+
+// console.log(Number('Jonas')); //return NaN, invalid number
+// console.log(typeof NaN); //it return type of number, so NaN is also a number
+
+// console.log(String(23)); //return '23'
+// console.log(typeof String(23)); //return string type
+// console.log(String(23), 23); //string, number of 23
+
+// //type coercion
+// console.log('I am ' + 23 + ' years old'); //string + (number -> coercion to string) + string, only plus operator don't do operator coercion
+// console.log('23' - '10' - 3); //return 10, minus operator triggered and convert string to number
+// console.log('23' * '2'); //return number 46
+// console.log('23' > '18'); //return boolean true
+
+// let n = '1' + 1;
+// n = n - 1;
+// console.log(n); //return 10, 1. '1' + 1 -> 11, 11 - 1 -> 10
+
+//Chapter21-Equality Operators: ==(loose equality operator) vs ===(strict equality operator)
+const age = 18;
+
+//always use === for good practice of code
+if(age === 18) console.log('You just became an adult (strict)'); //strict equality operator, return true only if both side equals to true
+//18 === 18 -> true
+//18 === 19 -> false
+//'18' == 18 -> true
+//'18' === 18 -> false
+if(age == 18) console.log('You just became an adult (loose)'); //loose equality operator
+
+const favNumber = prompt("What is your fav number?");
+console.log(favNumber);
+console.log(typeof favNumber); //return string
+
+if(favNumber == 23) console.log('23 is a great number'); //'23' == 23, loose equality operator
+if(favNumber === 23) console.log('23 is a great number'); //won't return '23 is a great number', since using strict equality operator
+
+const leastFavNumber = Number(prompt("What is your least fav number?"));
+console.log(leastFavNumber);
+console.log(typeof leastFavNumber); //return string
+if(leastFavNumber == 7) console.log('7 is not a great number'); //'3' == 3, return the string , loose equality operator
+if(leastFavNumber === 7) console.log('7 is not a great number'); //also return '3 is not a great number', since using strict equality operator
+
+if(favNumber !== 23) console.log('Why not 23');
