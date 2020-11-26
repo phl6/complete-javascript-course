@@ -169,11 +169,37 @@
 
 //----------------------------------------------------------------------------------------------------
 //Chapter23-Logical Operators
-const hasDriversLicense = true; //A
-const hasGoodVision = true; //B
+// const hasDriversLicense = true; //A
+// const hasGoodVision = true; //B
 
-console.log(hasDriversLicense && hasGoodVision); //true
-console.log(hasDriversLicense || hasGoodVision); //true
-console.log(!hasDriversLicense); //False
+// console.log(hasDriversLicense && hasGoodVision); //true
+// console.log(hasDriversLicense || hasGoodVision); //true
+// console.log(!hasDriversLicense); //False
 
+//----------------------------------------------------------------------------------------------------
+//Chapter24-Swtich Statements
+// const day = 'monday';
+
+// switch(day){
+//     case 'monday':
+//         console.log('M');
+//         break;
+//     case 'tuesaday':
+//         console.log('T');
+//         break;
+//     default:
+//         console.log('other day');
+//         break;
+// }
+
+//----------------------------------------------------------------------------------------------------
+//Chapter25-Statements and Expressions
+//theory
+
+//----------------------------------------------------------------------------------------------------
+//Chapter28-The Conditional(Tenery) Operators
+// const age = 23;
+// age >= 18 ? console.log('I can drink alcoholic drinks now') :　console.log(`I can't drink alchohol`);
+
+// console.log(`I like to drink ${age >= 18 ? `drink wine` : `drink water`}`);
 
