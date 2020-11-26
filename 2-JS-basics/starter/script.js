@@ -203,3 +203,26 @@
 
 // console.log(`I like to drink ${age >= 18 ? `drink wine` : `drink water`}`);
 
+// var fullAge = true;
+// console.log(fullAge);
+
+// var job;
+// console.log(job);
+
+// job = 'Teacher';
+// console.log(job);
+
+// // Variable naming rules
+// var _3years = 3;
+// var johnMark = 'John and MArk';
+// var if = 23;
+
+//----------------------------------------------------------------------------------------------------
+//Chapter29-Coding Challenge#4
+
+
+const bill = prompt(`How much is the bill`);
+Number(bill)
+const tip = bill >= 50 || bill <=300 ? bill * 0.15 : bill * 0.20;
+
+console.log(`Tip of the bill is ${tip}`);
