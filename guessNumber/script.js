@@ -11,37 +11,39 @@ const displayMessage = function (message) {
 
 //generate answer
 let secretNumber = Math.trunc(Math.random()*20 +1);
-let guess = document.querySelector('.guess').value;
 let score = document.querySelector('.score').value;
+let highScore = document.querySelector('.highscore').textContent;
+let chkButton = document.querySelector('.check');
 score = 20;
 
 //for debug
 document.querySelector('.answer').textContent = secretNumber; 
 
 //game starts here
-document.querySelector('.check').addEventListener('click',
- function () {
+chkButton.addEventListener('click',
+ function() {
     const guess = Number(document.querySelector('.guess').value);
-    console.log(guess, typeof guess);
+    // console.log(guess, typeof guess);
 
-    //when score > 0 , game continues
-    if(!guess){
-        displayMessage('No input');
-    }else if(secretNumber == guess){
-        displayMessage('CORRECT! CONGRATS');
-
-        if(score > highScore){
-            document.querySelector('.highScore').textContent = score;
+    //game logic
+    if(guess > 20 || guess <= 0){ //if guess is out of range
+        displayMessage('📣Please guess between 1 and 20📣');
+    }else if(score >= 0 && secretNumber == guess){ //correct answer
+        displayMessage('🎊🍾CORRECT! CONGRATS!🍾🎊');
+        chkButton.disabled = true; //turn button into unclickable if answer is correct
+        document.querySelector('.number').textContent = secretNumber;
+        if(score >= document.querySelector('.highscore').textContent){
+            document.querySelector('.highscore').textContent = score;
         }
-    }else{
-        //if answer is incorrect
+    }else{  //incorrect answer
         displayMessage(guess > secretNumber ? '📈 Too high!' : '📉 Too low!');
-        score--;
+        if(score != 0) score--;
         document.querySelector('.score').textContent = score;
         //end game
         if(score == 0){
-            displayMessage('GAME OVER');  
+            displayMessage('🤧 Game Over 🤧');  
             document.querySelector('.score').textContent = 0;
         }
     }
 });
+
