@@ -26,3 +26,10 @@ for(let i = 0; i < btnsOpenModal.length; i++)
 
 btnCloseModal.addEventListener('click', closeModal); //close the modal by clicking the cross button
 overlay.addEventListener('click', closeModal); //close the modal by clicking empty space
+
+//keydown = press any button on keyboard. e stands for event object here as an argument
+document.addEventListener('keydown', (e) => { 
+    console.log(e.key);
+    if(e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal(); //used classList.contains() to check if the modal is opened
+    //console.log('Esc is pressed')
+});
