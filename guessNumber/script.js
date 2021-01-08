@@ -35,6 +35,7 @@ checkBtn.addEventListener('click',
         displayMessage('🎊🍾CORRECT! CONGRATS!🍾🎊');
         checkBtn.disabled = true; //turn button into unclickable if answer is correct
         document.querySelector('.number').textContent = secretNumber;
+        
         if(score >= document.querySelector('.highscore').textContent){
             document.querySelector('.highscore').textContent = score;
         }
