@@ -3,7 +3,7 @@
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.close-modal');
-const btnsOpenModal = document.querySelectorAll('.show-modal'); //querySelectorAll, returns a node list, 
+const btnsOpenModal = document.querySelectorAll('.show-modal'); //querySelectorAll, array of buttons, returns a node list, 
 
 //console.log(btnsOpenModal);
 
@@ -20,7 +20,7 @@ const closeModal = () => {
     overlay.classList.add('hidden');
 }
 
-//open the modal
+//open the modal, handling an array of buttons
 for(let i = 0; i < btnsOpenModal.length; i++)  
     btnsOpenModal[i].addEventListener('click', openModal);
 
