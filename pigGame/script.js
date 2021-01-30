@@ -14,7 +14,7 @@ let rollBtn = document.querySelector('.btn--roll');
 let newGameBtn = document.querySelector('.btn--new');
 let holdBtn = document.querySelector('.btn--hold');
 
-let dice, playing, currentScore, activePlayer, scores; //storing scores of playes, scores[0] = player0, scores[1] = player1
+let dice, playing, currentScore, activePlayer, scores ; //storing scores of playes, scores[0] = player0, scores[1] = player1
 
 let rollDice = () => dice = Math.trunc(Math.random() * 6 + 1);
 
