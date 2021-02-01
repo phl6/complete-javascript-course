@@ -22,13 +22,13 @@ const a = arr[0];
 const b = arr[1];
 const c = arr[2];
  
-//destructing the array from the right side
+//***Destructuring the array from the right side***
 const [x, y, z] = arr; 
-console.log(x,y,z);
+console.log(x,y,z); // 0 1 2
 
 //extract the first two elements of the array
 const [first1, second1] = restaurant.categories;
-console.log(first1, second1);
+console.log(first1, second1); // Italian Pizzeria
 
 //extract only the first and third elements
 let [main, ,secondary] = restaurant.starterMenu;
@@ -49,7 +49,7 @@ console.log(main, secondary); //Garlic Bread Focaccia
 //Destructuring an array 
 //--------------------------------------------------------------------------------------------------------
 console.log(restaurant.order(2,0)); //["Garlic Bread", "Pizza"], which is an array
-const [starter, mainCourse] = restaurant.order(2, 0);
+const [starter, mainCourse] = restaurant.order(2, 0); //function delcard in restaurant obj
 console.log(starter, mainCourse); //Garlic Bread Pizza, which is separate element
 
 //--------------------------------------------------------------------------------------------------------

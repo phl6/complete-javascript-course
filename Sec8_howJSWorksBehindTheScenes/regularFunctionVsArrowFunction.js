@@ -51,4 +51,4 @@ var addArrow = (a,b) => {
     return a + b;
 };
 
-addArrow(2,5,7); //error
+// addArrow(2,5,7); //error
