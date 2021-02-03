@@ -2,12 +2,17 @@
 //Section9 - 105 - Spread Operator ...
 //========================================================================================================
 /*
+INTRODUCTION:
 
 ... <- this is the spread operator, very useful
 
 spread operator, array, map, strings, sets, etc. are based on Iterable
 Almost all JS built in data structures are based on Iterables
 EXCEPT Objects
+
+USAGE:
+- To unpack an array
+    -> maybe pass the unpacked array into function or object
 
 */
 
@@ -46,8 +51,8 @@ const restaurant = {
         will be delivered to ${address} at ${time}`);
     },
 
-    orderPasta: function(ingredient1, ingredient2, ingredient3){
-        
+    orderPasta: function(ing1, ing2, ing3){
+        console.log(`Here is your delicious pasta with ${ing1}. ${ing2}, ${ing3}.`);
     }
   };
 
