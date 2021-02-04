@@ -1,27 +1,28 @@
 "use strict"
 //========================================================================================================
-//Section9 - 110 - for of loop
+//Section9 - 113 - Looping Objects: Object Keys, Values, and Entries
 //========================================================================================================
 /*
 INTRODUCTION:
 
- creates a loop iterating over iterable objects 
- e.g. built-in String, Array, array-like objects (e.g., arguments or NodeList), TypedArray, Map, Set, and user-defined iterables
-
-
-EXAMPLE:
-    const array1 = ['a', 'b', 'c'];
-
-    for (const element of array1) {
-    console.log(element);
-    }
-
-    // expected output: "a"
-    // expected output: "b"
-    // expected output: "c"
 
 */
+const weekdays = ['mon', 'tue', 'wed', 'thur', 'fri', 'sat', 'sun'];
 
+const openingHours = {
+    [weekdays[3]]: {
+        open: 12,
+        close: 22,
+    },
+    [weekdays[4]]: {
+        open: 11,
+        close: 23,
+    },
+    [weekdays[5]]: {
+        open: 0, //Open 24 hours
+        close: 24,
+    }
+};
 
 const restaurant = {
     name: 'Classico Italiano',
@@ -33,21 +34,8 @@ const restaurant = {
     order: function(starterIndex, mainIndex){
       return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]]; //return an array
     },
-  
-    openingHours: {
-        thu: {
-            open: 12,
-            close: 22,
-        },
-        fri: {
-            open: 11,
-            close: 23,
-        },
-        sat: {
-            open: 0, //Open 24 hours
-            close: 24,
-        }
-    },
+    
+    openingHours,
   
     // ******VERY IMPORTANT*******
     //function inside an object
@@ -68,51 +56,59 @@ const restaurant = {
     }
   };
 
-//--------------------------------------------------------------------------------------------------------
-// Looop through array
-//--------------------------------------------------------------------------------------------------------
-const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
-// console.log(menu); //["Focaccia", "Bruschetta", "Garlic Bread", "Caprese Salad", "Pizza", "Pasta", "Risotto"]
+// console.log(openingHours);
 
-for (const item of menu){
-    console.log(item);
+//--------------------------------------------------------------------------------------------------------
+// Properties Name
+//--------------------------------------------------------------------------------------------------------
+const properties = Object.keys(openingHours);
+// console.log(properties); // returns an array: ["thu", "fri", "sat"]
+
+// console.log(`We are open on ${properties.length} days`); //We are open on 3 days
+
+
+// for(const day of Object.keys(openingHours)){
+//     console.log(day);
+// }
+// thu
+// fri
+// sat
+
+//Final Result
+let openStr = `We are open on ${properties.length} days: `;
+for(const day of properties){
+    openStr = openStr + `${day} `; 
 }
-// Focaccia
-// Bruschetta
-// Garlic Bread
-// Caprese Salad
-// Pizza
-// Pasta
-// Risotto
+console.log(openStr);
 
 //--------------------------------------------------------------------------------------------------------
-// ENTRIES - return current index and the element itself
+// Properties Values
 //--------------------------------------------------------------------------------------------------------
-const mainMenu = restaurant.mainMenu;
+const values = Object.values(openingHours);
+console.log(values);
+// 0: {open: 12, close: 22}
+// 1: {open: 11, close: 23}
+// 2: {open: 0, close: 24}
 
-for (const item of mainMenu.entries()){
-    console.log(item);
+//--------------------------------------------------------------------------------------------------------
+// Entire Object
+//--------------------------------------------------------------------------------------------------------
+const entries = Object.entries(openingHours);
+console.log(entries);
+
+for(const x of entries){
+    console.log(entries);
 }
-// [0, "Pizza"]
-// [1, "Pasta"]
-// [2, "Risotto"]
+// 0: "thur"
+// 1: {open: 12, close: 22}
+// 0: "fri"
+// 1: {open: 11, close: 23}
+// 0: "sat"
+// 1: {open: 0, close: 24}
 
-// console.log([...mainMenu.entries()]);
-
-
-//--------------------------------------------------------------------------------------------------------
-// Start menu at index 1 (2 Approaches)
-//--------------------------------------------------------------------------------------------------------
-//First Approach
-for (const item of mainMenu.entries()){
-    console.log(`${item[0]+1}:${item[1]}`);
+for (const [day, {open, close}] of entries){ //just like in loop array
+    console.log(`On ${day} we open at ${open} and close at ${close}.`);
 }
-// 1:Pizza
-// 2:Pasta
-// 3:Risotto
-
-//Second Approach
-for (const [i,el] of mainMenu.entries()){
-    console.log(`${i+1}:${el}`);
-}
-
+// On thur we open at 12 and close at 22.
+// On fri we open at 11 and close at 23.
+// On sat we open at 0 and close at 24.
