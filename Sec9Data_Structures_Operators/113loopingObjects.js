@@ -90,6 +90,10 @@ console.log(values);
 // 1: {open: 11, close: 23}
 // 2: {open: 0, close: 24}
 
+for (const x of values){
+    console.log(x);
+}
+
 //--------------------------------------------------------------------------------------------------------
 // Entire Object ---- Object.entries()
 //--------------------------------------------------------------------------------------------------------
@@ -97,7 +101,7 @@ const entries = Object.entries(openingHours);
 console.log(entries);
 
 for(const x of entries){
-    console.log(entries);
+    console.log(x);
 }
 // 0: "thur"
 // 1: {open: 12, close: 22}

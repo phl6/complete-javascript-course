@@ -183,7 +183,7 @@ const question = new Map([
 console.log(question);
 
 //--------------------------------------------------------------------------------------------------------
-// Convert Object to Map***
+// !!!Convert Object to Map!!!
 //--------------------------------------------------------------------------------------------------------
 console.log(Object.entries(openingHours));
 // [Array(2), Array(2), Array(2)]
