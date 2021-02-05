@@ -1,5 +1,12 @@
 'use strict';
 //========================================================================================================
+//========================================================================================================
+//Section9 - 116, 117 - Maps 
+//========================================================================================================
+//========================================================================================================
+
+
+//========================================================================================================
 //Section9 - 116 - Maps Fundamentals
 //========================================================================================================
 /*
@@ -150,12 +157,80 @@ console.log(rest.get(arr)); //Solution1: Should declare like this
 rest.set(document.querySelector('h1'), 'Heading');
 console.log(rest); //{h1 => "Heading"}
 
-
-
-
-
 //--------------------------------------------------------------------------------------------------------
 // Deleting all elements in a map ---- .clear()
 //--------------------------------------------------------------------------------------------------------
-// rest.clear();
+rest.clear();
 console.log(rest.size); // 0
+
+
+//========================================================================================================
+//Section9 - 117 - Maps - Iteration
+//========================================================================================================
+//--------------------------------------------------------------------------------------------------------
+// Another way to Create a Map
+//--------------------------------------------------------------------------------------------------------
+const question = new Map([
+    ['question', 'What is the best programming language in the world?'],
+    [1, 'C'],
+    [2, 'Java'],
+    [3, 'JavaScript'],
+    ['correct', 3],
+    [true, 'Congrats'],
+    [false, 'Answer is incorrect.'],
+]);
+
+console.log(question);
+
+//--------------------------------------------------------------------------------------------------------
+// Convert Object to Map***
+//--------------------------------------------------------------------------------------------------------
+console.log(Object.entries(openingHours));
+// [Array(2), Array(2), Array(2)]
+// 0: "thur"
+// 1: {open: 12, close: 22}
+// 0: "fri"
+// 1: {open: 11, close: 23}
+// 0: "sat"
+// 1: {open: 0, close: 24}
+
+
+//Real Converting here
+const hours = new Map(Object.entries(openingHours));
+console.log(hours);
+// Map(3) {"thur" => {…}, "fri" => {…}, "sat" => {…}}
+// [[Entries]]
+// 0: {"thur" => Object}
+// key: "thur"
+// value: {open: 12, close: 22}
+// 1: {"fri" => Object}
+// key: "fri"
+// value: {open: 11, close: 23}
+// 2: {"sat" => Object}
+// key: "sat"
+// value: {open: 0, close: 24}
+
+//--------------------------------------------------------------------------------------------------------
+// Loop through a map
+//--------------------------------------------------------------------------------------------------------
+console.log(question.get('question')); //What is the best programming language in the world?
+
+// only show the first three elements in the map, which all of them are 'number' type
+for (const [key, value] of question){
+    if(typeof key === 'number') console.log(`Answer ${key} : ${value}`); 
+}
+
+//ask question, cast the answer to Number type 
+// const answer = Number(prompt('Your answer? (1) C  (2) Java  (3) JavaScript'));
+// console.log(typeof answer);
+
+// console.log(answer === question.get('correct') ? question.get(true) : question.get(false)); 
+
+
+//--------------------------------------------------------------------------------------------------------
+// Convert Map to Array
+//--------------------------------------------------------------------------------------------------------
+console.log([...question]); //whole object
+console.log([...question.entries()]); //whole object
+console.log([...question.keys()]);    //key to array
+console.log([...question.values()]);  //values to array
