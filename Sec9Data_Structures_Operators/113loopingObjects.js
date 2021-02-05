@@ -59,7 +59,7 @@ const restaurant = {
 // console.log(openingHours);
 
 //--------------------------------------------------------------------------------------------------------
-// Properties Name
+// Properties Name ---- Object.keys()
 //--------------------------------------------------------------------------------------------------------
 const properties = Object.keys(openingHours);
 // console.log(properties); // returns an array: ["thu", "fri", "sat"]
@@ -82,7 +82,7 @@ for(const day of properties){
 console.log(openStr);
 
 //--------------------------------------------------------------------------------------------------------
-// Properties Values
+// Properties Values  ---- Object.values()
 //--------------------------------------------------------------------------------------------------------
 const values = Object.values(openingHours);
 console.log(values);
@@ -91,7 +91,7 @@ console.log(values);
 // 2: {open: 0, close: 24}
 
 //--------------------------------------------------------------------------------------------------------
-// Entire Object
+// Entire Object ---- Object.entries()
 //--------------------------------------------------------------------------------------------------------
 const entries = Object.entries(openingHours);
 console.log(entries);
