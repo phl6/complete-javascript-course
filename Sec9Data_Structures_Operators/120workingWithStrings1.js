@@ -143,3 +143,95 @@ const checkBaggage = function(item){
 checkBaggage('I have a laptop, some Food and a pocket knife');
 checkBaggage('Socks and camera');
 checkBaggage('Got some snacks and a gun for protection');
+
+
+//--------------------------------------------------------------------------------------------------------
+// split()
+//--------------------------------------------------------------------------------------------------------
+console.log('a+very+nice+string'.split('+')); // ["a", "very", "nice", "string"], returns an array
+console.log('Louis Li'.split(' ')); // ["Louis", "Li"]
+
+const [firstname, lastname] = 'Louis Li'.split(' ');
+console.log(firstname, lastname); // Louis Li
+console.log([firstname], [lastname]); // ["Louis"] ["Li"]
+
+//--------------------------------------------------------------------------------------------------------
+// join()
+//--------------------------------------------------------------------------------------------------------
+const newName = ['Mr.', firstname, lastname.toUpperCase()].join(' ');
+console.log(newName); // Mr. Louis LI
+
+const capitalizeName = function(name){
+    const names = name.toLowerCase().split(' ');
+    const namesUpper = [];
+
+    for(const n of names){
+        //    namesUpper.push(n[0].toUpperCase() +  n.slice(1));
+        namesUpper.push(n.replace(n[0], n[0].toUpperCase()));
+    }
+    console.log(namesUpper.join(' '));
+}
+
+const passenger1 = 'kObE bRyaNt';
+const passenger2 = 'jessica ann smith davis'; 
+capitalizeName(passenger1); // Kobe Bryant
+capitalizeName(passenger2); // Jessica Ann Smith Davis
+
+//--------------------------------------------------------------------------------------------------------
+// padding()
+//--------------------------------------------------------------------------------------------------------
+const message = 'Go to Gate 23!';
+console.log(message.padStart(25, '+').padEnd(35, '+')); 
+console.log('Louis'.padStart(24, '+').padEnd(35, '+'));
+
+const maskCreditCard = function(number){
+    const str = number + '' ;
+    const last = str.slice(-4);
+    return last.padStart(str.length, '*');
+
+}
+
+console.log(maskCreditCard(4567898765987)); // *********5987
+console.log(maskCreditCard('3456789876543456789')); // ***************678
+
+//--------------------------------------------------------------------------------------------------------
+// repeat()
+//--------------------------------------------------------------------------------------------------------
+const repeatMsg1 = 'Bad weather... All departures delayed...';
+console.log(repeatMsg1.repeat(5)); // Bad weather... All departures delayed... x5
+
+const planesInLine = function(n) {console.log(`There are ${n} planes in line ${'🛫'.repeat(n)}`)};
+
+planesInLine(5); // 120workingWithStrings1.js:203 There are 5 planes in line 🛫🛫🛫🛫🛫
+
+
+
+
+//--------------------------------------------------------------------------------------------------------
+// Practice
+//--------------------------------------------------------------------------------------------------------
+document.body.append(document.createElement('textarea'));
+document.body.append(document.createElement('button'));
+
+/*
+underscore_case
+ first_name
+Some_variable
+   calculate_AGE
+delayed_departure
+*/
+
+document.querySelector('button').addEventListener('click', function(){
+    const text0 = document.querySelector('textarea').value;
+    console.log(typeof text0); //string
+
+    const rows = text0.split('\n');
+    // console.log(rows);
+
+    for(const [i, row] of rows.entries()){
+        const [first, second] = row.toLowerCase().trim().split('_');
+        const output = `${first}${second.replace(second[0], second[0].toUpperCase())}`;
+        console.log(`${output.padEnd(20)} ${'✅'.repeat(i+1)}`); 
+    }
+})
+
