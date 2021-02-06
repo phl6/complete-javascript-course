@@ -86,7 +86,7 @@ for (const item of menu){
 // Risotto
 
 //--------------------------------------------------------------------------------------------------------
-// ENTRIES - return current index and the element itself
+// *****ENTRIES***** - return current index and the element itself
 //--------------------------------------------------------------------------------------------------------
 const mainMenu = restaurant.mainMenu;
 
@@ -111,7 +111,7 @@ for (const item of mainMenu.entries()){
 // 2:Pasta
 // 3:Risotto
 
-//Second Approach
+//*****Second Approach*****
 for (const [i,el] of mainMenu.entries()){
     console.log(`${i+1}:${el}`);
 }

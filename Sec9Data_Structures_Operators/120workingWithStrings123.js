@@ -226,7 +226,6 @@ document.querySelector('button').addEventListener('click', function(){
     console.log(typeof text0); //string
 
     const rows = text0.split('\n');
-    // console.log(rows);
 
     for(const [i, row] of rows.entries()){
         const [first, second] = row.toLowerCase().trim().split('_');
