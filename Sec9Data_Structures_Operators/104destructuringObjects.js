@@ -85,6 +85,7 @@ console.log(sat); //{open: 0, close: 24}
 const {fri: {open: friOpen, close: friClose}} = openingHours;
 console.log(friOpen, friClose); //11 23
 
+
 // ******VERY IMPORTANT*******
 //work with function 
 //PASSING AN OBJECT AS A PARAM TO CALL A FUNCTION IN AN OBJECT
