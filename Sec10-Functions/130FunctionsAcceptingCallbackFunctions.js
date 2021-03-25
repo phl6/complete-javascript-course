@@ -1,7 +1,7 @@
 'use strict';
 
 //========================================================================================================
-//Section10 - 130 - A Closer Look At Functions
+//Section10 - 130 - Functions Accepting Callback Functions
 //========================================================================================================
 const oneWord = function(str){
     return str.replace(/ /g, '').toLowerCase();
