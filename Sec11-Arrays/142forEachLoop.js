@@ -74,70 +74,88 @@ const currencies = new Map([
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
-// 141  Simple Array Method
+
+/////////////////////////////////////////////////
+// 141 For Each Loop
+
+// When to use FOR EACH and When to use FOR OF ?
+
+// ***continue*** and ***break*** statements can't be used with FOR EACH LOOP
+// FOR EACH will always loop through the entire array
+
+// other than that it's just personal preference
+
 /////////////////////////////////////////////////
 
 //--------------------------------------------------------------------------------------------------------------
-//slice()
-//doesn't mutate the array
+//for of loop
 //--------------------------------------------------------------------------------------------------------------
-let arr = ['a', 'b', 'c', 'd', 'e'];
+console.log('-----FOR OF-----');
+for(const movement of movements){
+    if(movement > 0){
+        console.log(`You deposited ${movement}`);
+    }else{
+        console.log(`You withdrew ${Math.abs(movement)}`);
+    }
+}
+//Result:
+// You deposited 200
+// You deposited 450
+// You withdrew 400
+// You deposited 3000
+// You withdrew 650
+// You withdrew 130
+// You deposited 70
+// You deposited 1300
 
-//return element from 2nd position to end
-console.log(arr.slice(2)); //["c", "d", "e"]
+console.log('-----ACCESSING COUNTER VARIABLE of FOR OF LOOP-----');
+for(const [i, movement] of movements.entries()){
+    if(movement > 0){
+        console.log(`Movement ${i+1}: You deposited ${movement}`);
+    }else{
+        console.log(`Movement ${i+1}: You withdrew ${Math.abs(movement)}`);
+    }
+}
 
-//return position 2-3 elements, note that 4th position element won't be returned
-console.log(arr.slice(2,4)); //["c", "d"]
-
-//return last element of the array
-console.log(arr.slice(-1)); //["e"]
-
-//return last 2 elements of the array
-console.log(arr.slice(-2)); //["d","e"]
-
-//return 1st to last 3 elements
-console.log(arr.slice(1, -2)); //["b", "c"]
-
-// arr.slice() vs [...arr] to create shallow copy
-// they are the same, just personal preference
-console.log(arr.slice()); //["a", "b", "c", "d", "e"]
-console.log([...arr]);    //["a", "b", "c", "d", "e"]
-
-//--------------------------------------------------------------------------------------------------------------
-//splice()
-//very similar to slice(), but splice instead "will mutate the array"
-//--------------------------------------------------------------------------------------------------------------
-console.log(arr.splice(2)); //["c", "d", "e"]
-console.log(arr); //["a","b"]
-
-//*** Commonly used
-//***remove the last element of an array
-arr.splice(-1);
-console.log(arr); //["a"]
-
-//--------------------------------------------------------------------------------------------------------------
-//reverse()
-//mutates the original array
-//--------------------------------------------------------------------------------------------------------------
-const arr2 = ['j', 'i', 'h', 'g', 'f'];
-console.log(arr2.reverse()); //["f", "g", "h", "i", "j"]
-console.log(arr2); //["f", "g", "h", "i", "j"], original array has been mutated
+// Movement 1: You deposited 200
+// Movement 2: You deposited 450
+// Movement 3: You withdrew 400
+// Movement 4: You deposited 3000
+// Movement 5: You withdrew 650
+// Movement 6: You withdrew 130
+// Movement 7: You deposited 70
+// Movement 8: You deposited 1300
 
 //--------------------------------------------------------------------------------------------------------------
-//concat()
+//for each loop
+//requires callback function
 //--------------------------------------------------------------------------------------------------------------
-const letters = arr.concat(arr2);
-//approach1
-console.log(letters); //["a", "f", "g", "h", "i", "j"]
+console.log('-----FOR EACH-----');
+//same result as above
+movements.forEach(function(movement){
+    if(movement > 0){
+        console.log(`You deposited ${movement}`);
+    }else{
+        console.log(`You withdrew ${Math.abs(movement)}`);
+    }
+});
+// How it works
+// 0: function(200)
+// 1: function(450)
+// 2: function(400)
+// ...
 
-//approach2
-console.log([...arr, ...arr2]); //["a", "f", "g", "h", "i", "j"]
+console.log('-----ACCESSING COUNTER VARIABLE of FOR EACH LOOP-----');
+//In order to use the callback function
+//***first param should always be the current element
+//***second param should always be the current index
+//***third param should always be the entire array that we are looping over
 
-//--------------------------------------------------------------------------------------------------------------
-//join()
-//doesn't mutate the original array
-//--------------------------------------------------------------------------------------------------------------
-console.log(letters.join(' - ')); // a - f - g - h - i - j
-
-
+movements.forEach(function(mov, i, arr){
+    if(mov > 0){
+        console.log(`Movement ${i+1}: You deposited ${mov}`);
+    }else{
+        console.log(`Movement ${i+1}: You withdrew ${Math.abs(mov)}`);
+    }
+});
 
