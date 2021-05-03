@@ -17,12 +17,12 @@ First-Class Function
 
 -> store function in variables or properties:
 e.g.
-const add = (a,b) => a + b;
+1)  const add = (a,b) => a + b;
 
-const counter = {
-    value: 23,
-    inc: function() {this.value++}
-}
+2)  const counter = {
+        value: 23,
+        inc: function() {this.value++}
+    }
 
 -> pass functions as args to OTHER functions:
 e.g. 

@@ -6,7 +6,7 @@
 /*
 INTRODUCTION:
 
-    NEW WAY(ES6): 
+    //NEW WAY(ES6): 
     const createBooking = function(flightNum, numPassengers = 1, price = 199*numPassengers){
         ...
     }

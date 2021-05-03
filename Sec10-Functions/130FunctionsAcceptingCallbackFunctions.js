@@ -1,7 +1,7 @@
 'use strict';
 
 //========================================================================================================
-//Section10 - 130 - A Closer Look At Functions
+//Section10 - 130 - Functions Accepting Callback Functions
 //========================================================================================================
 const oneWord = function(str){
     return str.replace(/ /g, '').toLowerCase();
@@ -13,7 +13,7 @@ const upperFirstWord = function(str){
 }
 
 //higher order function
-const transformer = function(str, fn){
+const transformer = function(str, fn){ //passing function into a function
     console.log(`Original string: ${str}`);
     console.log(`Transformed string: ${fn(str)}`);
     console.log(`Transformed by: ${fn.name}`);
