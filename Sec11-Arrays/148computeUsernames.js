@@ -69,6 +69,50 @@ const currencies = new Map([
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
+// Ch.145 ****Creating DOM Element*****
+const displayMovements = function(movement){
+    containerMovements.innerHTML = '';
+    
+    movements.forEach(function(mov, index){
+        //2 types of movements: DEPOSIT or WITHDRAWAL
+        const type = mov > 0 ? `deposit` : `withdrawal`;
+
+        const html = `       
+         <div class="movements__row">
+            <div class="movements__type movements__type--${type}">${index + 1} ${type}</div>
+            // <div class="movements__date">3 days ago</div>
+            <div class="movements__value">${mov}€</div>
+         </div>
+         `;
+        containerMovements.insertAdjacentHTML('afterbegin', html);
+    });
+};
+
+
 ///////////////////////////////////////
 // 148 Computing Usernames
+//
+// e.g. Steven Thomas Williams -> stw
 ///////////////////////////////////////
+
+//loops over the account array 
+//in each iteration, it manipulates the current account object
+//then add a username to it
+const createUsernames = function(accs) {
+    accs.forEach(function(acc){
+        acc.username = acc.owner //creates a new variable (username) in each account object with format
+        .toLowerCase()
+        .split(' ')
+        .map(name => name[0])
+        .join('');
+    });
+} 
+
+createUsernames(accounts);
+
+console.log(accounts);
+// interestRate: 1.2
+// movements: (8) [200, 450, -400, 3000, -650, -130, 70, 1300]
+// owner: "Jonas Schmedtmann"
+// pin: 1111
+// username: "js" 
