@@ -147,5 +147,55 @@ console.log(withdrawals); //[-400, -650, -130]
 //reduce（）
 //　-boils("reduces") all array elements down to one single value 
 //　(e.g. adding all elements tgt)
+// 
+// reduce takes 4 params in the callback function
+// 1. accumulator -> SNOWBALL
+// 2. current -> current iterartion's element
+// 3. index
+// 4. array
+// 
+// const a = b.reduce(function(accumulator, currentElement, index, array){
+//  return accumulator + currentElement;
+// }, 0);
+//
+// ***0 above is the initial value***
 //--------------------------------------------------------------------------------------------------------------
+const balance0 = movements.reduce(function(acc, cur, i, arr){
+  console.log(`Iteration ${i}: ${acc}`);
+  return acc + cur;
+}, 0);
 
+console.log(balance0); //3840
+// Iteration 0: 0
+// Iteration 1: 200
+// Iteration 2: 650
+// Iteration 3: 250
+// Iteration 4: 3250
+// Iteration 5: 2600
+// Iteration 6: 2470
+// Iteration 7: 2540
+// 3840
+
+//same as
+const balance1 = movements.reduce((acc, mov) => acc += mov, 1000); 
+console.log(balance1); //4840
+
+//same as
+let balance2 = 0;
+for (const mov of movements) balance2 += mov;
+console.log(balance2); //3830
+
+//keep this function for Bankist app
+const calcDisplayBalance = function(movements){
+  const balance = movements.reduce((acc, mov) => acc += mov, 0);
+  labelBalance.textContent = `${balance} EUR`;
+}
+
+calcDisplayBalance(account1.movements);
+
+//Maximum value 
+const max = movements.reduce((acc, mov) => {
+  return (acc > mov) ? acc : mov;
+}, movements[0]); 
+
+console.log(max); //3000
