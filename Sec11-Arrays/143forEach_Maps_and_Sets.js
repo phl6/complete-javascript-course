@@ -1,7 +1,7 @@
 'use strict';
 
 //========================================================================================================
-//Section11 - 142 FOR EACH LOOP
+//Section11 - 143 FOR EACH with MAPS AND SETS
 //========================================================================================================
 
 // Data
@@ -75,87 +75,37 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 
-/////////////////////////////////////////////////
-// 142 For Each Loop
-
-// When to use FOR EACH and When to use FOR OF ?
-
-// ***continue*** and ***break*** statements can't be used with FOR EACH LOOP
-// FOR EACH will always loop through the entire array
-
-// other than that it's just personal preference
-
-/////////////////////////////////////////////////
-
 //--------------------------------------------------------------------------------------------------------------
-//for of loop
+// FOR EACH WITH MAPS
 //--------------------------------------------------------------------------------------------------------------
-console.log('-----FOR OF-----');
-for(const movement of movements){
-    if(movement > 0){
-        console.log(`You deposited ${movement}`);
-    }else{
-        console.log(`You withdrew ${Math.abs(movement)}`);
-    }
-}
-//Result:
-// You deposited 200
-// You deposited 450
-// You withdrew 400
-// You deposited 3000
-// You withdrew 650
-// You withdrew 130
-// You deposited 70
-// You deposited 1300
-
-console.log('-----ACCESSING COUNTER VARIABLE of FOR OF LOOP-----');
-for(const [i, movement] of movements.entries()){
-    if(movement > 0){
-        console.log(`Movement ${i+1}: You deposited ${movement}`);
-    }else{
-        console.log(`Movement ${i+1}: You withdrew ${Math.abs(movement)}`);
-    }
-}
-
-// Movement 1: You deposited 200
-// Movement 2: You deposited 450
-// Movement 3: You withdrew 400
-// Movement 4: You deposited 3000
-// Movement 5: You withdrew 650
-// Movement 6: You withdrew 130
-// Movement 7: You deposited 70
-// Movement 8: You deposited 1300
-
-//--------------------------------------------------------------------------------------------------------------
-//for each loop
-//requires callback function
-//--------------------------------------------------------------------------------------------------------------
-console.log('-----FOR EACH-----');
-//same result as above
-movements.forEach(function(movement){
-    if(movement > 0){
-        console.log(`You deposited ${movement}`);
-    }else{
-        console.log(`You withdrew ${Math.abs(movement)}`);
-    }
+currencies.forEach(function(value, key, map){
+    console.log(`${key}: ${value}`);
 });
-// How it works
-// 0: function(200)
-// 1: function(450)
-// 2: function(400)
-// ...
 
-console.log('-----ACCESSING COUNTER VARIABLE of FOR EACH LOOP-----');
-//In order to use the callback function
-//***first param should always be the current element
-//***second param should always be the current index
-//***third param should always be the entire array that we are looping over
+// USD: United States dollar
+// EUR: Euro
+// GBP: Pound sterling
 
-movements.forEach(function(mov, i, arr){
-    if(mov > 0){
-        console.log(`Movement ${i+1}: You deposited ${mov}`);
-    }else{
-        console.log(`Movement ${i+1}: You withdrew ${Math.abs(mov)}`);
-    }
+//--------------------------------------------------------------------------------------------------------------
+// FOR EACH WITH SETS
+//--------------------------------------------------------------------------------------------------------------
+const currenciesUnique = new Set(['USD', 'GBP','USD', 'EUR', 'EUR']);
+
+console.log(currenciesUnique); //{"USD", "GBP", "EUR"}
+
+currenciesUnique.forEach(function(value, key, map){
+  console.log(`${key}: ${value}`);
+});
+
+//If follow the way of how maps does, it will output the followings:
+// USD: USD
+// GBP: GBP
+// EUR: EUR
+//As we see here, key and value are the same here, because SET DOES NOT have key and value pair, so key here doesn't mean anything at all
+
+//Therefore, we replace it with _value
+//***BY CONVENTION, using _ to declare a variable means it's a useless variable
+currenciesUnique.forEach(function(value, _, map){
+  console.log(`${value}: ${value}`);
 });
 
