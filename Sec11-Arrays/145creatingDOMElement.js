@@ -1,7 +1,7 @@
 'use strict';
 
 //========================================================================================================
-//Section11 - 145 Creating DOM Element
+//Section11 - 145 ****Creating DOM Element****
 //========================================================================================================
 
 // Data
@@ -61,10 +61,6 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////
-// LECTURES
-
 const currencies = new Map([
   ['USD', 'United States dollar'],
   ['EUR', 'Euro'],
@@ -73,10 +69,41 @@ const currencies = new Map([
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-/////////////////////////////////////////////////
-//145 Creating DOM Element
+//////////////////////////////////////////////////////////////////////////////////////////////////
+//145 ****Creating DOM Element*****
 
-// 
+// 1) empty the elements in a container
+// 2) creating element
+// 3) inserting element into a container
 
-/////////////////////////////////////////////////
+// It's always best to write function, rather than writing code in the global environment
+//////////////////////////////////////////////////////////////////////////////////////////////////
 
+const displayMovements = function(movement){
+
+    //***VERY IMPORTANT*** empty the entire container before adding new element *****************
+    containerMovements.innerHTML = '';
+
+    movements.forEach(function(mov, index){
+
+        //2 types of movements: DEPOSIT or WITHDRAWAL
+        const type = mov > 0 ? `deposit` : `withdrawal`;
+
+        //create DOM element based on how many movement in an account (which is an array)
+        //${} <- template literals helps to 1)change type of movement, 2) update the index, 3) display the movement here
+        const html = `       
+         <div class="movements__row">
+            <div class="movements__type movements__type--${type}">${index + 1} ${type}</div>
+            // <div class="movements__date">3 days ago</div>
+            <div class="movements__value">${mov}€</div>
+         </div>
+         `;
+
+        //***VERY IMPORTANT*** INSERTING dom element into html under Container Movement**********
+        //Ref: https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML
+        //Commonly used: afterbegin or beforeend
+        containerMovements.insertAdjacentHTML('afterbegin', html);
+    });
+};
+
+displayMovements(account1.movements);
