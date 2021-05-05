@@ -1,7 +1,7 @@
 'use strict';
 
 //========================================================================================================
-//Section11 - 153 The Magic of Chaining Methods 
+//Section11 - 155 The Find Method
 //========================================================================================================
 
 // Data
@@ -127,29 +127,21 @@ const account1 = {
 //--------------------------------------------------------------------------------------------------------------
 
 /////////////////////////////////////////////////
-// 153 The Magic of Chaining Methods
+// 155 The Find Method
+// ***VERY USEFUL to use it with objects***
+//
+// similar to filter
+// but it *only return the first element in an array that fulfills the condition*
+// unlike filter that returns an whole array
 /////////////////////////////////////////////////
 
 //--------------------------------------------------------------------------------------------------------------
-//PIPELINE
 //--------------------------------------------------------------------------------------------------------------
-const eurToUsd = 1.1;
-const totalDepositUSD = movements.filter(mov => mov > 0)
-                                 .map(mov => mov * eurToUsd)
-                                 .reduce((accum, mov) => accum += mov, 0);
-// console.log(totalDepositUSD);
+console.log(movements.find(mov => mov < 0)); //-400
 
-//To Debug:
-const totalDepositUSD_debug = movements.filter(mov => mov < 0)
-                                //  .map(mov => mov * eurToUsd)
-                                .map((mov, i, arr) => {
-                                  // console.log(arr);
-                                  return  mov * eurToUsd;
-                                })
-                                 .reduce((accum, mov) => accum += mov, 0);
+// console.log(accounts);
 
-// console.log(totalDepositUSD_debug); //return all the negative movements
-// (3) [-400, -650, -130]
-// (3) [-400, -650, -130]
-// (3) [-400, -650, -130]
-// -1298.0000000000002
+
+//VERY USEFUL to use it with objects
+const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+console.log(account);   // {owner: "Jessica Davis", movements: Array(8), interestRate: 1.5, pin: 2222, username: "jd"}
