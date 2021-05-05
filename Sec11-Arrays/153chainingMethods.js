@@ -69,11 +69,15 @@ const account1 = {
   
   const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
   
+//--------------------------------------------------------------------------------------------------------------
+//---------------------------------------Start of added functionalities-----------------------------------------
+//--------------------------------------------------------------------------------------------------------------
+
   // Ch.145 ****Creating DOM Element*****
-  const displayMovements = function(movement){
+  const displayMovements = function(account){
       containerMovements.innerHTML = '';
       
-      movements.forEach(function(mov, index){
+      account.movements.forEach(function(mov, index){
           //2 types of movements: DEPOSIT or WITHDRAWAL
           const type = mov > 0 ? `deposit` : `withdrawal`;
   
@@ -88,12 +92,64 @@ const account1 = {
       });
   };
 
-  /////////////////////////////////////////////////
+  const createUsernames = function(accs) {
+    accs.forEach(function(acc){
+        acc.username = acc.owner //creates a new variable (username) in each account object with format
+        .toLowerCase()
+        .split(' ')
+        .map(name => name[0])
+        .join('');
+    });
+  } 
+
+  const calcDisplaySummary = function(account){
+    const deposit = account.movements.filter(mov => mov > 0).reduce((accum, mov) => accum += mov, 0);
+    const withdrawal = account.movements.filter(mov => mov < 0).reduce((accum, mov) => accum += mov, 0);
+    const interest = account.movements.filter(int => int > 0)
+                                      .map(deposit => (deposit*account.interestRate)/100)
+                                      .filter(int => int >= 1) //filter out interest that is less than 1
+                                      .reduce((accum,int) => accum + int ,0);
+    const summary = deposit - withdrawal;
+
+    //display summary
+    labelSumIn.textContent = `${deposit}€`;
+    labelSumOut.textContent = `${ Math.abs(withdrawal)}€`;;
+    labelSumInterest.textContent = `${interest}€`;
+    labelBalance.textContent = `${summary}€`;
+  }
+
+  createUsernames(accounts);
+  calcDisplaySummary(account1);
+  displayMovements(account1);
+  
+//--------------------------------------------------------------------------------------------------------------
+//---------------------------------------End of added functionalities-------------------------------------------
+//--------------------------------------------------------------------------------------------------------------
 
 /////////////////////////////////////////////////
 // 153 The Magic of Chaining Methods
 /////////////////////////////////////////////////
 
 //--------------------------------------------------------------------------------------------------------------
-//
+//PIPELINE
 //--------------------------------------------------------------------------------------------------------------
+const eurToUsd = 1.1;
+const totalDepositUSD = movements.filter(mov => mov > 0)
+                                 .map(mov => mov * eurToUsd)
+                                 .reduce((accum, mov) => accum += mov, 0);
+// console.log(totalDepositUSD);
+
+//To Debug:
+const totalDepositUSD_debug = movements.filter(mov => mov < 0)
+                                //  .map(mov => mov * eurToUsd)
+                                .map((mov, i, arr) => {
+                                  // console.log(arr);
+                                  return  mov * eurToUsd;
+                                })
+                                 .reduce((accum, mov) => accum += mov, 0);
+
+// console.log(totalDepositUSD_debug); //return all the negative movements
+// (3) [-400, -650, -130]
+// (3) [-400, -650, -130]
+// (3) [-400, -650, -130]
+// -1298.0000000000002
