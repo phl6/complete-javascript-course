@@ -1,7 +1,8 @@
 'use strict';
 
 //========================================================================================================
-//Section11 - 159 The some and every method
+//Section11 - 161 Sorting Arrays
+//          - 162 More Ways of Creating and Filling Arrays
 //========================================================================================================
 
 // Data
@@ -67,17 +68,20 @@ const account1 = {
     ['GBP', 'Pound sterling'],
   ]);
   
-  // const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+  const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
   
 //--------------------------------------------------------------------------------------------------------------
 //---------------------------------------Start of added functionalities-----------------------------------------
 //--------------------------------------------------------------------------------------------------------------
 
   // Ch.145 ****Creating DOM Element*****
-  const displayMovements = function(account){
+  const displayMovements = function(account, sort = false){
       containerMovements.innerHTML = '';
-      
-      account.movements.forEach(function(mov, index){
+    
+    //Ch161 sorting functionality
+    const movs = sort ? account.movements.slice().sort((a,b) => a - b) : account.movements;
+
+      movs.forEach(function(mov, index){
           //2 types of movements: DEPOSIT or WITHDRAWAL
           const type = mov > 0 ? `deposit` : `withdrawal`;
   
@@ -91,6 +95,16 @@ const account1 = {
           containerMovements.insertAdjacentHTML('afterbegin', html);
       });
   };
+    //Ch161 sorting functionality
+    //universal variable that record the state of sorting
+    let sorted = false;
+    
+    btnSort.addEventListener('click', function(e){
+      e.preventDefault();
+      displayMovements(currentAccount, !sorted); //when click turn the sorted to true
+      sorted = !sorted; //then toggle sorted back to false
+      console.log('sort');
+    });
 
   const createUsernames = function(accs) {
     accs.forEach(function(acc){
@@ -239,38 +253,86 @@ btnLoan.addEventListener('click', function(event){
     inputLoanAmount.value = '';
 });
 
-  
 //--------------------------------------------------------------------------------------------------------------
 //---------------------------------------End of added functionalities-------------------------------------------
 //--------------------------------------------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------------------------------------------
-//Ch159 The some and every method
+//Ch161 sorting Arrays
 //
-// 'some' method is very similar to include,
-// instead, it can be passed in a condition and return a boolean,
-// rather than doing equality checking
-//
-// 'every' method
-//  return true(boolean) only if all the elements in an array fulfill the condition
+// sort(): mutates the original array
+//         and it doesn't work on numbers, as it ***sorts based on string***
+//         The default sort order is ascending
 //--------------------------------------------------------------------------------------------------------------
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-//EQUALITY
-console.log(movements.includes(-130)); //true
+//Strings
+const owners = ['Jonas', 'Zach', 'Adam', 'Martha'];
+console.log(owners.sort()); //["Adam", "Jonas", "Martha", "Zach"]
 
-//SOME: CONDITION
-console.log(movements.some(mov => mov === -130)); //true, same as using include
+//Numbers
+console.log(movements); 
+console.log(movements.sort()); //not really sorted with numbers -> [-130, -400, -650, 1300, 200, 3000, 450, 70]
 
-console.log(movements.some(mov => mov > 0)); //true
-console.log(movements.some(mov => mov > 5000)); //false
+// Ascending order
+// return < 0 -> A, B (keep order)
+// return > 0 -> B, A (switch order)
 
-//EVERY: CONDITION
-console.log(movements.every(mov => mov > 0)); //false
-console.log(account4.movements.every(mov => mov > 0)); //true
+// Original:
+// movements.sort((a, b) => {
+//     if(a > b) return 1;
+//     if(b > a) return -1;
+// }) 
 
-//SEPARATE CALLBACKS
-const deposit = mov => mov > 0;
-console.log(movements.some(deposit)); //true
-console.log(movements.every(deposit)); //false
-console.log(movements.filter(deposit)); //[200, 450, 3000, 70, 1300]
+//Easier version:
+movements.sort((a,b) => a-b);
+console.log(movements); // [-650, -400, -130, 70, 200, 450, 1300, 3000]
+
+// Descending order
+// Original:
+// movements.sort((a, b) => {
+//     if(a > b) return -1;
+//     if(b > a) return 1;
+// }) 
+
+movements.sort((a,b) => b - a);
+console.log(movements); // [3000, 1300, 450, 200, 70, -130, -400, -650]
+
+//--------------------------------------------------------------------------------------------------------------
+//Ch162 More Ways of Creating and Filling Arrays
+//
+//--------------------------------------------------------------------------------------------------------------
+//Creating Array
+console.log([1,2,3,4,5,6,7]); //[1, 2, 3, 4, 5, 6, 7]
+console.log(new Array(1,2,3,4,5,6,7)); //[1, 2, 3, 4, 5, 6, 7]
+
+//Empty Array + fill() method
+const x = new Array(7);
+console.log(x); //[empty x 7]
+console.log(x.map(() => 5)); // [empty x 7] <- this won't work
+
+x.fill(1); // <- use this
+console.log(x); // [1, 1, 1, 1, 1, 1, 1]
+
+const y = new Array(7);
+y.fill(1, 3, 5);
+console.log(y); // [empty × 3, 1, 1, empty × 2]
+
+//Array.from()
+const arrFrom = Array.from({length: 7}, () => 1);
+console.log(arrFrom); // [1, 1, 1, 1, 1, 1, 1]
+
+const z = Array.from({length: 7}, (_, i) => i + 1); 
+console.log(z); // [1, 2, 3, 4, 5, 6, 7]
+
+
+// take out all the movements in UI of an account, and store it into an array
+const movementsUI = Array.from(document.querySelectorAll('.movements__value'));
+
+labelBalance.addEventListener('click', function(){
+    const movementsUI = Array.from(document.querySelectorAll('.movements__value'), el => el.textContent.replace('€', ''));
+
+    console.log(movementsUI); // ["1300", "70", "-130", "-650", "3000", "-400", "450", "200"]
+})
+
+

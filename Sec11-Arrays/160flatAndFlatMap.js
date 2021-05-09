@@ -1,7 +1,7 @@
 'use strict';
 
 //========================================================================================================
-//Section11 - 159 The some and every method
+//Section11 - 160 flat and flatMap
 //========================================================================================================
 
 // Data
@@ -67,7 +67,7 @@ const account1 = {
     ['GBP', 'Pound sterling'],
   ]);
   
-  // const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+  const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
   
 //--------------------------------------------------------------------------------------------------------------
 //---------------------------------------Start of added functionalities-----------------------------------------
@@ -239,38 +239,45 @@ btnLoan.addEventListener('click', function(event){
     inputLoanAmount.value = '';
 });
 
-  
 //--------------------------------------------------------------------------------------------------------------
 //---------------------------------------End of added functionalities-------------------------------------------
 //--------------------------------------------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------------------------------------------
-//Ch159 The some and every method
+//Ch160 flat and flatMap
 //
-// 'some' method is very similar to include,
-// instead, it can be passed in a condition and return a boolean,
-// rather than doing equality checking
+// flat: remove the nested array, and return as a single array,
+//       BUT, flat default only flats array with 1 level deep
 //
-// 'every' method
-//  return true(boolean) only if all the elements in an array fulfill the condition
+// flatMap: only go 1 level deep
 //--------------------------------------------------------------------------------------------------------------
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-//EQUALITY
-console.log(movements.includes(-130)); //true
+const arr = [[1,2,3], [4,5,6], 7, 8];
+console.log(arr.flat()); //[1, 2, 3, 4, 5, 6, 7, 8]
 
-//SOME: CONDITION
-console.log(movements.some(mov => mov === -130)); //true, same as using include
+const arrDeep = [[[1,2],3], [4,[5,6]], 7, 8];
+console.log(arrDeep.flat()); //default to flat only 1 level, so -> [Array(2), 3, 4, Array(2), 7, 8]
+console.log(arrDeep.flat(2)); //2 levels -> [1, 2, 3, 4, 5, 6, 7, 8]
 
-console.log(movements.some(mov => mov > 0)); //true
-console.log(movements.some(mov => mov > 5000)); //false
+//combine all the accounts movements into one array
+// const accountsMovements = accounts.map(acc => acc.movements); //put each movement array in each account into one array
+// console.log(accountsMovements);
 
-//EVERY: CONDITION
-console.log(movements.every(mov => mov > 0)); //false
-console.log(account4.movements.every(mov => mov > 0)); //true
+// const allMovements = accountsMovements.flat();
+// console.log(allMovements); 
+// //[200, 450, -400, 3000, -650, -130, 70, 1300, 5000, 3400, -150, -790, 
+// // -3210, -1000, 8500, -30, 200, -200, 340, -300, -20, 50, 400, -460, 430, 1000, 700, 50, 90]
 
-//SEPARATE CALLBACKS
-const deposit = mov => mov > 0;
-console.log(movements.some(deposit)); //true
-console.log(movements.every(deposit)); //false
-console.log(movements.filter(deposit)); //[200, 450, 3000, 70, 1300]
+// const overallBalance = allMovements.reduce((acc, mov) => acc + mov, 0);
+// console.log(overallBalance); // 17840
+
+//flat()
+const overallBalance2 = accounts.map(acc => acc.movements)
+                                               .flat()
+                                               .reduce((acc, mov) => acc += mov, 0); 
+console.log(overallBalance2); //17840
+
+//flatMap()
+const overallBalance3 = accounts.flatMap(acc => acc.movements).reduce((acc, mov) => acc += mov);
+console.log(overallBalance3); //17840
+
