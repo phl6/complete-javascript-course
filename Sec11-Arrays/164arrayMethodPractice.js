@@ -1,8 +1,7 @@
 'use strict';
 
 //========================================================================================================
-//Section11 - 161 Sorting Arrays
-//          - 162 More Ways of Creating and Filling Arrays
+//Section11 - 164 Array Method Practice
 //========================================================================================================
 
 // Data
@@ -258,82 +257,60 @@ btnLoan.addEventListener('click', function(event){
 //--------------------------------------------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------------------------------------------
-//Ch161 sorting Arrays
-//
-// sort(): mutates the original array
-//         and it doesn't work on numbers, as it ***sorts based on string***
-//         The default sort order is ascending
+//Ch164 Array Method Practice
 //--------------------------------------------------------------------------------------------------------------
-// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-//Strings
-const owners = ['Jonas', 'Zach', 'Adam', 'Martha'];
-console.log(owners.sort()); //["Adam", "Jonas", "Martha", "Zach"]
+//Ex1 - Sum all positive movements in all accounts
+const backDepositSum = accounts.map(acc => acc.movements).flat().filter(mov => mov > 0).reduce((accum, mov) => accum += mov, 0);
+console.log(backDepositSum); //25180
 
-//Numbers
-console.log(movements); 
-console.log(movements.sort()); //not really sorted with numbers -> [-130, -400, -650, 1300, 200, 3000, 450, 70]
+//Ex2 - number of deposit in all accounts that is > 1000
+// p.s. using reduce() to return the counter
+const numDeposits1000_1 = accounts.flatMap(acc => acc.movements).filter(mov => mov >= 1000).length; //first way of doing
+const numDeposits1000_2 = accounts.flatMap(acc => acc.movements).reduce((count, cur) => cur >= 1000 ? ++count : count, 0); //secund way of doing
+console.log(numDeposits1000_1); //6 
+console.log(numDeposits1000_2); //6
 
-// Ascending order
-// return < 0 -> A, B (keep order)
-// return > 0 -> B, A (switch order)
+//count++ vs ++count
+//prefix vs postfix increment
+let a = 10;
+console.log(a++); //10
+console.log(a); //11
 
-// Original:
-// movements.sort((a, b) => {
-//     if(a > b) return 1;
-//     if(b > a) return -1;
-// }) 
+let b = 20;
+console.log(++b); //21
 
-//Easier version:
-movements.sort((a,b) => a-b);
-console.log(movements); // [-650, -400, -130, 70, 200, 450, 1300, 3000]
+//Ex3 - return an object of both sum of deposit and sum of withdrawal
+//Create a new object instead of a string
+const sums= accounts.flatMap(acc => acc.movements).reduce((sums, cur) => {
+    cur > 0 ? sums.deposit += cur : sums.withdrawal += cur;
+    return sums;  //return reduce method explicitly
+}, {deposit:0, withdrawal:0});
 
-// Descending order
-// Original:
-// movements.sort((a, b) => {
-//     if(a > b) return -1;
-//     if(b > a) return 1;
-// }) 
+console.log(sums); //{deposit: 25180, withdrawal: -7340}
 
-movements.sort((a,b) => b - a);
-console.log(movements); // [3000, 1300, 450, 200, 70, -130, -400, -650]
+//same as above
+const {deposit, withdrawal}= accounts.flatMap(acc => acc.movements).reduce((sums, cur) => {
+    sums[cur > 0 ? 'deposit' : 'withdrawal'] += cur;
+    return sums;  
+}, {deposit:0, withdrawal:0});
 
-//--------------------------------------------------------------------------------------------------------------
-//Ch162 More Ways of Creating and Filling Arrays
-// fill()
-// from()
-//--------------------------------------------------------------------------------------------------------------
-//Creating Array
-console.log([1,2,3,4,5,6,7]); //[1, 2, 3, 4, 5, 6, 7]
-console.log(new Array(1,2,3,4,5,6,7)); //[1, 2, 3, 4, 5, 6, 7]
+console.log(deposit, withdrawal); //25180 -7340
 
-//Empty Array + fill() method
-const x = new Array(7);
-console.log(x); //[empty x 7]
-console.log(x.map(() => 5)); // [empty x 7] <- this won't work
+//Ex4 - return a string with title case while word in exception array won't be title-cased
+//this is a nice title -> This Is a Nice Title
+const convertTitleCase = function(title){
+    const capitalize = str => str[0].toUpperCase() + str.slice(1);
 
-x.fill(1); // <- use this
-console.log(x); // [1, 1, 1, 1, 1, 1, 1]
+    const exceptions = ['a','an','the','but','or','on','in','with'];
 
-const y = new Array(7);
-y.fill(1, 3, 5);
-console.log(y); // [empty × 3, 1, 1, empty × 2]
+    const titleCase = title.toLowerCase().split(' ').map(word => exceptions.includes(word) ? word : capitalize(word)).join(' ');
+    return titleCase;
 
-//Array.from()
-const arrFrom = Array.from({length: 7}, () => 1);
-console.log(arrFrom); // [1, 1, 1, 1, 1, 1, 1]
+}
 
-const z = Array.from({length: 7}, (_, i) => i + 1); 
-console.log(z); // [1, 2, 3, 4, 5, 6, 7]
-
-
-// ***take out all the movements in UI of an account, and store it into an array
-const movementsUI = Array.from(document.querySelectorAll('.movements__value'));
-
-labelBalance.addEventListener('click', function(){
-    const movementsUI = Array.from(document.querySelectorAll('.movements__value'), el => el.textContent.replace('€', ''));
-
-    console.log(movementsUI); // ["1300", "70", "-130", "-650", "3000", "-400", "450", "200"]
-})
+console.log(convertTitleCase('this is a nice title')); //This Is a Nice Title
+console.log(convertTitleCase('this is a LONG title but n ot too long')); //This Is a Long Title but N Ot Too Long
+console.log(convertTitleCase('and there is another title with an EXAMPLE')); //And There Is Another Title with an Example
 
 
