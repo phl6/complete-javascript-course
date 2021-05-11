@@ -1,7 +1,7 @@
 'use strict';
 
 //========================================================================================================
-//Section13 - 183 Selecting, Creating, Deleting Elements
+//Section13 - 184 styles.attributes and Classes
 //========================================================================================================
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
@@ -111,3 +111,61 @@ document.querySelector('.btn--close-cookie').addEventListener('click', function(
 // document.querySelector('.btn--close-cookie').addEventListener('click', function(){
 //   message.parentElement.removeChild(message);
 // });
+
+
+//--------------------------------------------------------------------------------------------------------------
+//184 styles, attributes and Classes
+//--------------------------------------------------------------------------------------------------------------
+//styles
+//------------------------------
+message.style.backgroundColor = '#37383d';
+message.style.width = '120%';
+
+console.log(message.style.height); // nothing
+console.log(message.style.backgroundColor); // rgb(55, 56, 61)
+
+console.log(getComputedStyle(message).height); //43px
+
+message.style.height = Number.parseFloat(getComputedStyle(message).height + 30 + 'px', 10);
+console.log(getComputedStyle(message).height);
+
+//changing css variables
+document.documentElement.style.setProperty('--color-primary', 'orangered');
+
+//Attributes
+//--------------
+const logo = document.querySelector('.nav__logo');
+console.log(logo.alt); //Bankist logo
+console.log(logo.src); //http://127.0.0.1:5500/img/logo.png
+console.log(logo.className); //nav__logo
+
+// logo.alt = 'Beautiful minimalist logo'
+
+//Non-standard
+console.log(logo.designer); //undefined <- this is not a standard property 
+
+//Get and SetAttribute
+console.log(logo.getAttribute('designer')); //Jonas
+logo.setAttribute('company', 'Bankist');
+console.log(logo.getAttribute('src')); //img/logo.png
+
+const link = document.querySelector('.twitter-link');
+console.log(link.href); // https://twitter.com/jonasschmedtman
+console.log(link.getAttribute('href')); // https://twitter.com/jonasschmedtman
+
+//Data attributes
+console.log(logo.dataset.versionNumber); //3.0
+
+
+//Classes
+//-------------
+
+//Use these
+logo.classList.add('c', 'j');
+logo.classList.remove('c', 'j');
+logo.classList.toggle('c');
+logo.classList.contains('c');
+
+//Don't use
+//this overrides all existing classes and only put one class on any elements
+logo.className = 'Jonas';
