@@ -1,7 +1,7 @@
 'use strict';
 
 //========================================================================================================
-//Section13 - 187 Event Propagation: Bubbling and Capturing
+//Section13 - 187 & 188 Event Propagation: Bubbling and Capturing
 //========================================================================================================
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
@@ -92,7 +92,7 @@ h1.addEventListener('click', alertH1);
 setTimeout(() =>  h1.removeEventListener('click', alertH1), 1000);
 
 //--------------------------------------------------------------------------------------------------------------
-//187 Event Propagation: Bubbling and Capturing
+//187 & 188 Event Propagation: Bubbling and Capturing
 //--------------------------------------------------------------------------------------------------------------
 // rgb(255,255,255)
 const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
