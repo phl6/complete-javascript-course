@@ -1,7 +1,7 @@
 'use strict';
 
 //========================================================================================================
-//Section13 - 187 Event Propagation: Bubbling and Capturing
+//Section13 - 189 Event Delegation: Implementing Page Navigation
 //========================================================================================================
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
@@ -97,22 +97,26 @@ setTimeout(() =>  h1.removeEventListener('click', alertH1), 1000);
 // rgb(255,255,255)
 const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 const randomColor = () => `rgb(${randomInt(0,255)}, ${randomInt(0,255)}, ${randomInt(0,255)})`;
-console.log(randomColor());
+// console.log(randomColor());
 
-//Parent Node 1
-document.querySelector('.nav').addEventListener('click', function(e){
-    this.style.backgroundColor = randomColor();
-    console.log('LINK', e.target === this);
-}, true);
+// //Parent Node 1
+// document.querySelector('.nav').addEventListener('click', function(e){
+//     this.style.backgroundColor = randomColor();
+//     console.log('LINK', e.target === this);
+// }, true);
 
-//Child Node 1
-document.querySelector('.nav__links').addEventListener('click', function(e){
-    this.style.backgroundColor = randomColor();
-    console.log('LINK', e.target === this);
-});
+// //Child Node 1
+// document.querySelector('.nav__links').addEventListener('click', function(e){
+//     this.style.backgroundColor = randomColor();
+//     console.log('LINK', e.target === this);
+// });
 
-//Child Node 2
-document.querySelector('.nav__link').addEventListener('click', function(e){
-    this.style.backgroundColor = randomColor();
-    console.log('LINK', e.target === this);
-});
+// //Child Node 2
+// document.querySelector('.nav__link').addEventListener('click', function(e){
+//     this.style.backgroundColor = randomColor();
+//     console.log('LINK', e.target === this);
+// });
+
+//--------------------------------------------------------------------------------------------------------------
+//189 Event Delegation: Implementing Page Navigation
+//--------------------------------------------------------------------------------------------------------------
