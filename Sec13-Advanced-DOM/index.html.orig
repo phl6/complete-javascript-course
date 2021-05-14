@@ -357,6 +357,11 @@
     <!-- <script src="184styles_attribute_classes.js"></script> -->
     <!-- <script src="185implementingSmoothScrolling.js"></script> -->
     <!-- <script src="186typesOfEvents_and_eventHandlers.js"></script> -->
-    <!-- <script src="187eventPropagation_Bubbling_and_Capturing.js"></script>-->
-	<script src="189eventDelegation_ImplementingPageNav.js"></script>  </body>
+    <!-- <script src="187eventPropagation_Bubbling_and_Capturing.js"></script> -->
+<<<<<<< HEAD
+    <script src="189eventDelegation_ImplementingPageNavigation.js"></script>
+=======
+    <script src="189eventDelegation_ImplementingPageNav.js"></script>
+>>>>>>> 0632935c00032fffbb96d525d5722652dc3f8ca2
+  </body>
 </html>
