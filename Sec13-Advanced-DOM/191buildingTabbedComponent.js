@@ -1,7 +1,7 @@
 'use strict';
 
 //========================================================================================================
-//Section13 - 187 Event Propagation: Bubbling and Capturing
+//Section13 - 191 Building a Tabbed Component
 //========================================================================================================
 const btnScrollTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
@@ -41,21 +41,7 @@ document.addEventListener('keydown', function (e) {
 //--------------------------------------------------------------------------------------------------------------
 // ***189 Event Delegation: Page Navigation 
 //--------------------------------------------------------------------------------------------------------------
-// METHOD1: without Event Delegation:
-//(1) retrieve all the element with class name '.nav__link'
-//(2) get the element attribute whenever a button is clicked
-//(3) use that anchor id (<a href>) to perform action
-
-// document.querySelectorAll('.nav__link').forEach(function(el){
-//   el.addEventListener('click', function(e){
-//     e.preventDefault(); // avoid moving to the destination by default, use JS instead
-//     const id = this.getAttribute('href'); //using getAttribute to get the destination of scrollTo
-//     document.querySelector(id).scrollIntoView({behavior: "smooth"})
-//   });
-// });
-
-
-// METHOD2: WITH Event Delegation:
+//Event Delegation:
 // 1. Add event listener to common parent element
 // 2. Determine what element originated the event
 
@@ -70,35 +56,33 @@ document.querySelector('.nav__links').addEventListener('click', function(e){
   }
 })
 
+//--------------------------------------------------------------------------------------------------------------
+// 191 Building a Tabbed Component
+//--------------------------------------------------------------------------------------------------------------
+// const opActive = "operations__tab--active";
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
+
+tabsContainer.addEventListener('click', function(e){
+  e.preventDefault();
+  const clicked = e.target.closest('.operations__tab');
+  // console.log(clicked);
+
+  //***Guard Clause, if there's nothing clicked, then immediately return the function
+  if(!clicked) return;
+
+  //Remove active classes
+  tabs.forEach(t => t.classList.remove('operations__tab--active'));
+  tabsContent.forEach(c => c.classList.remove('operations__content--active'));
+
+  //Activate tab
+  clicked.classList.add('operations__tab--active');
+  
+  //Activate content area
+  // console.log(clicked.dataset.tab);
+  document.querySelector(`.operations__content--${clicked.dataset.tab}`).classList.add('operations__content--active');
+});
 
 
 /* END OF IMPLEMENTING FUNCTIONS */
-
-//--------------------------------------------------------------------------------------------------------------
-//187 & 188 Event Propagation: Bubbling and Capturing
-//--------------------------------------------------------------------------------------------------------------
-// // rgb(255,255,255)
-// const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
-// const randomColor = () => `rgb(${randomInt(0,255)}, ${randomInt(0,255)}, ${randomInt(0,255)})`;
-// console.log(randomColor());
-
-// //Parent Node 1
-// document.querySelector('.nav').addEventListener('click', function(e){
-//     this.style.backgroundColor = randomColor();
-//     console.log('LINK', e.target === this);
-// });
-
-// //Child Node 1
-// document.querySelector('.nav__links').addEventListener('click', function(e){
-//     this.style.backgroundColor = randomColor();
-//     console.log('LINK', e.target === this);
-// });
-
-// //Child Node 2
-// document.querySelector('.nav__link').addEventListener('click', function(e){
-//     this.style.backgroundColor = randomColor();
-//     console.log('LINK', e.target === this);
-//     // e.stopPropagation();
-// });
-
-

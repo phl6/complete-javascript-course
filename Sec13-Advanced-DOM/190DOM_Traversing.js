@@ -41,21 +41,7 @@ document.addEventListener('keydown', function (e) {
 //--------------------------------------------------------------------------------------------------------------
 // ***189 Event Delegation: Page Navigation 
 //--------------------------------------------------------------------------------------------------------------
-// METHOD1: without Event Delegation:
-//(1) retrieve all the element with class name '.nav__link'
-//(2) get the element attribute whenever a button is clicked
-//(3) use that anchor id (<a href>) to perform action
-
-// document.querySelectorAll('.nav__link').forEach(function(el){
-//   el.addEventListener('click', function(e){
-//     e.preventDefault(); // avoid moving to the destination by default, use JS instead
-//     const id = this.getAttribute('href'); //using getAttribute to get the destination of scrollTo
-//     document.querySelector(id).scrollIntoView({behavior: "smooth"})
-//   });
-// });
-
-
-// METHOD2: WITH Event Delegation:
+//Event Delegation:
 // 1. Add event listener to common parent element
 // 2. Determine what element originated the event
 
@@ -71,34 +57,51 @@ document.querySelector('.nav__links').addEventListener('click', function(e){
 })
 
 
-
 /* END OF IMPLEMENTING FUNCTIONS */
 
 //--------------------------------------------------------------------------------------------------------------
-//187 & 188 Event Propagation: Bubbling and Capturing
+// 190 DOM Traversing
 //--------------------------------------------------------------------------------------------------------------
-// // rgb(255,255,255)
-// const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
-// const randomColor = () => `rgb(${randomInt(0,255)}, ${randomInt(0,255)}, ${randomInt(0,255)})`;
-// console.log(randomColor());
+const h1 = document.querySelector('h1');
 
-// //Parent Node 1
-// document.querySelector('.nav').addEventListener('click', function(e){
-//     this.style.backgroundColor = randomColor();
-//     console.log('LINK', e.target === this);
-// });
+//DOWNWARDS: child
+console.log(h1.querySelectorAll('.highlight')); //NodeList(2) [span.highlight, span.highlight]
 
-// //Child Node 1
-// document.querySelector('.nav__links').addEventListener('click', function(e){
-//     this.style.backgroundColor = randomColor();
-//     console.log('LINK', e.target === this);
-// });
+//(1-1) return Live HTML Collection of direct children
+console.log(h1.children); 
 
-// //Child Node 2
-// document.querySelector('.nav__link').addEventListener('click', function(e){
-//     this.style.backgroundColor = randomColor();
-//     console.log('LINK', e.target === this);
-//     // e.stopPropagation();
-// });
+//(1-2) dun use
+console.log(h1.childNodes);
 
+//(1-3-1) set property on a child (firstElementChild)
+h1.firstElementChild.style.color = 'white';
+//(1-3-2) set property on a child (lastElementChild)
+h1.lastElementChild.style.color = 'orangered';
 
+//UPWARDS: parents
+//(2-1) return Live HTML Collection of direct parent
+console.log(h1.parentElement);
+
+//(2-2) dun use
+console.log(h1.parentNode);
+
+//(2-3) not direct parent
+//.closet() is very similar to querySelector
+//querySelector() finds elements downwards while closest finds elements upwards
+h1.closest('.header').style.background = 'var(--gradient-secondary)'; //using css variable
+
+//SIDEWAYS: siblings
+//(3-1) only the direct sibling
+console.log(h1.previousElementSibling);
+console.log(h1.nextElementSibling);
+
+//(3-2) dun use 
+console.log(h1.previousSibling);
+console.log(h1.nextSibling);
+
+//go up one level and return all the children of the parent
+console.log(h1.parentElement.children); //HTMLCollection(4) [h1, h4, button.btn--text.btn--scroll-to, img.header__img]
+
+[...h1.parentElement.children].forEach(function(el){
+    if(el !== h1) el.style.transform = 'scale(0.5)';
+})
