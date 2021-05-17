@@ -1,7 +1,7 @@
 'use strict';
 
 //========================================================================================================
-//Section13 - 193 Implementing a Sticky Navigation: The Scroll Event
+//Section13 - 195 Revealing Elements On Scroll
 //========================================================================================================
 //189
 const btnScrollTo = document.querySelector('.btn--scroll-to');
@@ -15,6 +15,8 @@ const tabsContent = document.querySelectorAll('.operations__content');
 const nav = document.querySelector('.nav');
 //194
 const header = document.querySelector('.header');
+//195
+const allSections = document.querySelectorAll('.section');
 
 
 const overlay = document.querySelector('.overlay');
@@ -153,7 +155,7 @@ const navHeight = nav.getBoundingClientRect().height;
 //callback function passed to IntersectionObserver
 const stickyNav = function(entries){
     const [entry] = entries; //first element of the array, same as const entry = entries[0];
-    console.log(entry);
+    // console.log(entry);
 
     if(!entry.isIntersecting) nav.classList.add('sticky'); //.isIntersecting is important!!! 
     else nav.classList.remove('sticky');
@@ -169,6 +171,35 @@ const config = {
 
 const headerObserver = new IntersectionObserver(stickyNav, config);
 headerObserver.observe(header);
+
+//--------------------------------------------------------------------------------------------------------------
+// 195 Revealing Elements On Scroll
+//--------------------------------------------------------------------------------------------------------------
+// .section--hidden
+
+//Reveal Section
+
+const revealSection = function(entries, observer){
+    const [entry] = entries;
+    console.log(entry);
+
+    if(!entry.isIntersecting) return;
+    entry.target.classList.remove('section--hidden');
+    observer.unobserve(entry.target);
+}
+
+const sectConfig = {
+    root: null,
+    threshold: 0.15, //default 0
+  };
+
+const sectionObserver = new IntersectionObserver(revealSection, sectConfig);
+
+allSections.forEach(function(section){
+    sectionObserver.observe(section);
+    section.classList.add('section--hidden');
+});
+
 
 
 /* END OF IMPLEMENTING FUNCTIONS */
