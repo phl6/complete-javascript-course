@@ -21,6 +21,8 @@ const allSections = document.querySelectorAll('.section');
 const slides = document.querySelectorAll('.slide');
 const btnLeft = document.querySelector('.slider__btn--left');
 const btnRight = document.querySelector('.slider__btn--right');
+//198
+const dotContainer = document.querySelector('.dots');
 
 
 const overlay = document.querySelector('.overlay');
@@ -242,29 +244,63 @@ imgTargets.forEach(img => imageObserver.observe(img));
 let curSlide = 0;
 const maxSlide = slides.length;
 
-//Refactor code
-const goToSlide = function(slide){
-    slides.forEach((slide, index) => slide.style.transform = `translateX(${100 * (index - curSlide)}%)`);
-}
+const slider = function(){
+  // Functions
+  const createDots = function(){
+    slides.forEach(function(_, i){
+      dotContainer.insertAdjacentHTML('beforeend', `<button class="dots__dot" data-slide="${i}"></button>`);
+    })
+  };
 
-goToSlide(0);
+  const activateDot = function(slide){
+    document.querySelectorAll('.dots__dot').forEach(dot => dot.classList.remove('dots__dot--active'));
+    document.querySelector(`.dots__dot[data-slide="${slide}"]`).classList.add('dots__dot--active');
+  };
 
-const nextSlide = function(){
-    curSlide === maxSlide - 1 ? curSlide=0 : curSlide++;
-    goToSlide(curSlide);
-}
+  const goToSlide = function(slide){
+      slides.forEach((s, i) => s.style.transform = `translateX(${100 * (i - slide)}%)`);
+  };
 
-const prevSlide = function(){
-    curSlide === 0 ? curSlide = maxSlide - 1 : curSlide--;
-    goToSlide(curSlide);
-}
+  const nextSlide = function(){
+      curSlide === maxSlide - 1 ? curSlide=0 : curSlide++;
+      goToSlide(curSlide);
+      activateDot(curSlide);
+  };
 
-btnRight.addEventListener('click', nextSlide);
-btnLeft.addEventListener('click', prevSlide);
+  const prevSlide = function(){
+      curSlide === 0 ? curSlide = maxSlide - 1 : curSlide--;
+      goToSlide(curSlide);
+      activateDot(curSlide);
+  };
 
-//--------------------------------------------------------------------------------------------------------------
-// 198 Slider Component - 2
-//--------------------------------------------------------------------------------------------------------------
+  const init = function(){
+    goToSlide(0);
+    createDots();
+    activateDot(0);
+  };
+
+  init();
+
+  //Event Handlers
+  btnRight.addEventListener('click', nextSlide);
+  btnLeft.addEventListener('click', prevSlide);
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft') prevSlide();
+    if (e.key === 'ArrowRight') nextSlide();
+  });
+
+  dotContainer.addEventListener('click', function (e) {
+    if (e.target.classList.contains('dots__dot')) {
+      console.log('clicked');
+      const { slide } = e.target.dataset;
+      goToSlide(slide);
+      activateDot(slide);
+    }
+  });
+};
+
+slider();
 
 
 
