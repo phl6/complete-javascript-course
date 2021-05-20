@@ -1,10 +1,7 @@
 'use strict';
 
 //========================================================================================================
-//Section14 - 206 Prototypes
-
-// Prototype is very similar to class in traditional OOP
-// but not entirely the same
+//Section14 - 208 Prototype Inheritance With Built-in Objects
 //========================================================================================================
 
 //--------------------------------------------------------------------------------------------------------------
@@ -31,33 +28,36 @@ const jay = "";
 //--------------------------------------------------------------------------------------------------------------
 // 206 Prototypes
 //--------------------------------------------------------------------------------------------------------------
-console.log(Person.prototype);
 
 // ***Add method to Person Prototype
 Person.prototype.calcAge = function(){
     console.log(2037 - this.birthYear);
 };
 
-jonas.calcAge(); //46
-matilda.calcAge(); //39
+//--------------------------------------------------------------------------------------------------------------
+// 208 Prototype Inheritance With Built-in Objects
+//--------------------------------------------------------------------------------------------------------------
+console.log(jonas.__proto__); //{calcAge: ƒ, constructor: ƒ}
+//Object.prototype (top of prototype chain)
+console.log(jonas.__proto__.__proto__);
+console.log(jonas.__proto__.__proto__.__proto__); //null
 
-console.log(jonas.__proto__);
-// {calcAge: ƒ, constructor: ƒ}
-// calcAge: ƒ ()
-// constructor: ƒ (firstName, birthYear)
-// __proto__: Object
+console.dir(Person.prototype.constructor); //ƒ Person(firstName, birthYear)
 
-//NOT of Person, but objects created by the Person CONSTRUCTOR
-console.log(jonas.__proto__ === Person.prototype); //true
-console.log(Person.prototype.isPrototypeOf(jonas)); //true
-console.log(Person.prototype.isPrototypeOf(Person)); //false
+//Prototype of array
+const arr = [3,6,4,5,6,9,3]; // new Array === []
 
-//Set the property of the prototype
-Person.prototype.species = 'Homo Sapiens';
-console.log(jonas.species); //Homo Sapiens
+console.log(arr.__proto__);
+console.log(arr.__proto__ === Array.prototype); //true
 
-//jonas only has access to the prototype's species property,
-//but it doesn't have the property of species
-console.log(jonas.hasOwnProperty('species')); //false
+//Add a new method to Array prototype, therefore all the array inherits this method
+//But this is BAD code
+//just an experiment
+Array.prototype.unique = function(){
+    return [...new Set(this)];
+}
 
+console.log(arr.unique()); //(5) [3, 6, 4, 5, 9]
+
+console.dir(x => x+1);
 
