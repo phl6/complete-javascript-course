@@ -82,31 +82,31 @@ PersonCl.hey();
 // 213 Object Create
 //--------------------------------------------------------------------------------------------------------------
 
-//Different way of creating an object 
-const PersonProto = {
-    calcAge(){
-        console.log(2037 - this.birthYear);
-    },
+// //Different way of creating an object 
+// const PersonProto = {
+//     calcAge(){
+//         console.log(2037 - this.birthYear);
+//     },
 
-    init(firstName, birthYear){
-        this.firstName = firstName;
-        this.birthYear = birthYear;
-    },
-};
+//     init(firstName, birthYear){
+//         this.firstName = firstName;
+//         this.birthYear = birthYear;
+//     },
+// };
 
-//personProto 1
-const steven = Object.create(PersonProto);
-console.log(steven);
-steven.name = 'Steven';
-steven.birthYear = 2002;
-steven.calcAge(); //35
+// //personProto 1
+// const steven = Object.create(PersonProto);
+// console.log(steven);
+// steven.name = 'Steven';
+// steven.birthYear = 2002;
+// steven.calcAge(); //35
 
-console.log(steven.__proto__);
+// console.log(steven.__proto__);
 
-//personProto 2
-const sarah = Object.create(PersonProto);
-sarah.init('Sarah', 1979);
-sarah.calcAge(); //58
+// //personProto 2
+// const sarah = Object.create(PersonProto);
+// sarah.init('Sarah', 1979);
+// sarah.calcAge(); //58
 
 //--------------------------------------------------------------------------------------------------------------
 // 215 Inheritance Between "Classes" : Constructor Function
@@ -116,6 +116,7 @@ const Person = function(firstName, birthYear){
     this.birthYear = birthYear;
 };
 
+//methods setting 
 Person.prototype.calcAge = function(){
     console.log(2037-this.birthYear);
 };
@@ -149,3 +150,58 @@ console.log(mike instanceof Object); //true
 
 Student.prototype.constructor = Student;
 console.dir(Student.prototype.constructor);
+
+//--------------------------------------------------------------------------------------------------------------
+// 215 Inheritance Between "Classes" : ES6 Classes
+//--------------------------------------------------------------------------------------------------------------
+class StudentCl extends PersonCl{
+    constructor(fullname, birthYear, course){
+        //super always needs to happen first
+        super(fullname, birthYear);
+        this.course = course;
+    }
+
+    introduce(){
+        console.log(`My name is ${this.fullname} and I study ${this.course}`);
+    }
+
+    calcAge(){
+        console.log(`I'm ${2037 - this.birthYear} years old, but as a student I feel more like ${2037 - this.birthYear + 10} `);
+    }
+}
+
+const martha = new StudentCl('Martha Jones', 2012, 'Computer Science');
+martha.introduce();
+martha.calcAge();
+
+
+//--------------------------------------------------------------------------------------------------------------
+// 215 Inheritance Between "Classes" : Object.create()
+//--------------------------------------------------------------------------------------------------------------
+//Different way of creating an object 
+const PersonProto = {
+    calcAge(){
+        console.log(2037 - this.birthYear);
+    },
+
+    init(firstName, birthYear){
+        this.firstName = firstName;
+        this.birthYear = birthYear;
+    },
+};
+
+//personProto 1
+const steven = Object.create(PersonProto);
+
+//PROTOTYPE CHAIN
+//PersonProto -> StudentProto -> jay
+const StudentProto = Object.create(PersonProto); //student inherits from PersonProto
+StudentProto.init = function(firstName, birthYear, course){
+    PersonProto.init.call(this, firstName, birthYear);
+    this.course = course;
+}
+
+const jay = Object.create(StudentProto); //jay inherits from StudentProto
+jay.init('Jay', 2010, 'Computer Science');
+// jay.introduce();
+jay.calcAge(); //27
