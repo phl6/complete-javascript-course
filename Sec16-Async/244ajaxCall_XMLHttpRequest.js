@@ -43,6 +43,11 @@ const getCountryData = function(country){
     })
 }
 
+/*
+Following Ajax calls are run in parallel,
+cannot control which one finish first.
+Thus, the order of the response is different everytime.
+*/
 getCountryData('kazakhstan');
 getCountryData('Japan');
 getCountryData('uzbekistan');
