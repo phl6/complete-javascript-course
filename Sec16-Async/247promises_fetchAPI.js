@@ -89,8 +89,7 @@ const getCountryAndNeighbour = function(country){
 // getCountryData('kazakhstan');
 // getCountryData('Japan');
 
-// Ch246 callback hell - execute one by one, instead parallely
-// getCountryAndNeighbour('United States of America');
+// Ch246 callback hell - execute one by one, instead parallely 
 
 //Callback hell
 // setTimeout(() => {
