@@ -50,7 +50,7 @@ const renderError = function(msg){
 //Ch247 Promises and The Fetch API
 // const request = fetch(`https://restcountries.eu/rest/v2/name/japan`);
 // console.log(request);
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Ch248 Consuming Promise
 const getCountryData_ConsumePromise = function(country){
     fetch(`https://restcountries.eu/rest/v2/name/${country}`) //(1) fetch function returns a promise
@@ -65,7 +65,7 @@ const getCountryData_ConsumePromise = function(country){
 };
 
 // getCountryData_ConsumePromise('japan');
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //ch249 Chaining Promises
 const getCountryData_ChainingPromise = function(country){
     //Country 1
@@ -85,7 +85,7 @@ const getCountryData_ChainingPromise = function(country){
 };
     
 // getCountryData_ChainingPromise('United States of America');
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //ch250 Handling Rejected Promises
 const getCountryData_handleRejPromise = function(country){
     fetch(`https://restcountries.eu/rest/v2/name/${country}`) 
@@ -115,7 +115,7 @@ const getCountryData_handleRejPromise = function(country){
 
 // btn.addEventListener('click', () => getCountryData_handleRejPromise('portugal'));
 // getCountryData_handleRejPromise('adsfa');
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //ch251 Throwing Error Manually
 // const getCountryData_throwErrManually = function(country){
 //     fetch(`https://restcountries.eu/rest/v2/name/${country}`) 
@@ -149,6 +149,7 @@ const getCountryData_handleRejPromise = function(country){
 //     })
 // };
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //251 cont'd
 
 //generic function to do data fetching and ERROR HANDLING

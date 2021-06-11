@@ -11,7 +11,7 @@ const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//Ch255 Building a simple promise
+//**********Ch255 Building a simple promise***********
 
 //constructor will take exactly one parameter which is EXECUTOR FUNCTION and
 // in executor function, it takes 2 arguments 1. resolve 2. reject)
