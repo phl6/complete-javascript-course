@@ -35,28 +35,41 @@ const renderCountry = function (data, className = '') {
     })
 };
 
+const renderError = function(msg){
+  countriesContainer.insertAdjacentText('beforeend', msg);
+  // countriesContainer.style.opacity = 1;
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Ch259 Error Handling with Try Catch (with the code from 258)
 
 const whereAmI = async function(){
-    try{    //Geolocation
+    try{    
+        //Geolocation
         const pos = await getPosition();
-        const {latitude: lat, longitude: lng} = await pos.coords;
+        const {latitude: lat, longitude: lng} = pos.coords;
 
         //Reverse geolocation
+        // const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
         const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
-        if(!resGeo.okay) throw new Error('Problem getting location data')
+        if (!resGeo.ok) throw new Error('Problem getting location data');
         const dataGeo = await resGeo.json();
 
+        //Country data
         const res = await fetch(`https://restcountries.eu/rest/v2/name/${dataGeo.country}`);
+        if(!resGeo.ok) throw new Error('Problem getting country');
         const data = await res.json();
         renderCountry(data[0]);
+
+        return `You are in ${dataGeo.city}, ${dataGeo.country}`;
     }catch(err){
-        console.error(err);
+        // console.error(err);
+        renderError(err.message);
+        throw err;
     }
 };
 
-// whereAmI();
-whereAmI(); //this'll be shown later
+
+whereAmI();
 console.log('First log'); //this'll be shown first
 
