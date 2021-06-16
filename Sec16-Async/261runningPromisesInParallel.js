@@ -1,7 +1,9 @@
 'use strict';
 
 //========================================================================================================
-//Section14 - 259 Error Handling with Try Catch
+//Section14 - 261 Running Promises In Parallel
+//
+// Receive multiple data without caring the order
 //========================================================================================================
 
 
@@ -44,38 +46,45 @@ const renderError = function(msg){
   // countriesContainer.style.opacity = 1;
 }
 
+// from 250, generic function to do data fetching and ERROR HANDLING
+const getJSON = function(url, errorMsg = 'Something went wrong'){
+    return fetch(url)
+            .then(response => {
+                console.log(response);
+                if(!response.ok) throw new Error(`${errorMsg} (${response.status})`);
+
+                return response.json();
+            });
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//Ch259 Error Handling with Try Catch (with the code from 258)
+// 261 Running Promises In Parallel
 
-const whereAmI = async function(){
-    try{    
-        //Geolocation
-        const pos = await getPosition();
-        console.log(pos.coords);
-        const {latitude: lat, longitude: lng} = pos.coords;
+const get3Countries = async function(c1, c2, c3){
+    try {
+        //Load one promise after one
+        // const [data1] = await getJSON(`https://restcountries.eu/rest/v2/name/${c1}`);
+        // const [data2] = await getJSON(`https://restcountries.eu/rest/v2/name/${c2}`);
+        // const [data3] = await getJSON(`https://restcountries.eu/rest/v2/name/${c3}`);
+        
+        // console.log(data1.capital, data2.capital, data3.capital);
+        
+        //***Run promises at the same time (saves loading time)
+        const data = await Promise.all([
+            getJSON(`https://restcountries.eu/rest/v2/name/${c1}`),
+            getJSON(`https://restcountries.eu/rest/v2/name/${c2}`),
+            getJSON(`https://restcountries.eu/rest/v2/name/${c3}`)
+        ]);
 
-        //Reverse geolocation
-        // const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
-        const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
-        if (!resGeo.ok) throw new Error('Problem getting location data');
-        const dataGeo = await resGeo.json();
+        console.log(data);
 
-        //Country data
-        const res = await fetch(`https://restcountries.eu/rest/v2/name/${dataGeo.country}`);
-        if(!resGeo.ok) throw new Error('Problem getting country');
-        const data = await res.json();
-        renderCountry(data[0]);
+        // const [d1,d2,d3] = data;
+        // console.log(d1[0].capital, d2[0].capital, d3[0].capital);
+        console.log(data.map(d => d[0].capital));
 
-        return `You are in ${dataGeo.city}, ${dataGeo.country}`;
-    }catch(err){
-        // console.error(err);
-        renderError(err.message);
-        throw err;
+    } catch (error) {
+        console.error(error);
     }
 };
 
-
-// whereAmI();
-console.log('First log'); //this'll be shown first
-
-btn.addEventListener('click', whereAmI);
+get3Countries('Australia', 'South Africa', 'Canada');
