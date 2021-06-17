@@ -8,10 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Importing Module (all imports are hoisted to the top)
-import { addToCart,
-    totalPrice as tPrice,
-    tQ
-} from './shoppingCart.js';
+import { addToCart, totalPrice as tPrice, tQ } from './shoppingCart.js';
 
 addToCart('bread', 5); 
 console.log(tPrice, tQ);
@@ -73,3 +70,30 @@ shoppingCart2.addToCart('apple', 4);
 shoppingCart2.addToCart('pizza', 2);
 console.log(shoppingCart2);
 console.log(shoppingCart2.shoppingCost); //undefined
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//272 Introduction to NPM
+
+//1.npm installed lodash
+//2.import lodash's cloneDeep (default export)
+import cloneDeep from 'lodash-es/cloneDeep.js';
+
+const state = {
+    cart: [
+        {product: 'bread', quantity: 5},
+        {product: 'pizza', quantity: 6},
+    ],
+    user: {loggedIn: true},
+};
+
+const stateDefaultShallowClone = Object.assign({}, state);
+const stateDeepClone = cloneDeep(state);
+
+state.user.loggedIn = false;
+console.log(stateDefaultShallowClone.user.loggedIn); //false
+console.log(stateDeepClone.user.loggedIn); //true
+
+
+if(module.hot){
+    module.hot.accept()
+}
