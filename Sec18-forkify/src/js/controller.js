@@ -30,7 +30,9 @@ const controlRecipes = async function () {
     recipeView.render(model.state.recipe);
     
   } catch (err) {
-    console.log(err);
+    // console.log(err);
+    recipeView.renderError();
+    console.error(err);
   }
 };
 
@@ -42,4 +44,12 @@ const controlRecipes = async function () {
 // window.addEventListener('load', showRecipe);
 
 //combine above 2 eventListners
-['hashchange', 'load'].forEach(ev => window.addEventListener(ev, controlRecipes));
+// ['hashchange', 'load'].forEach(ev => window.addEventListener(ev, controlRecipes));
+
+//287 Implement Publisher-Subscriber Pattern
+//Subscriber
+const init = function(){
+  recipeView.addHandlerRender(controlRecipes);
+};
+
+init();

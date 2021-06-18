@@ -6,6 +6,8 @@ class RecipeView{
     //PRIVATE variables
     #parentElement = document.querySelector('.recipe');
     #data;
+    #errorMessage = 'We could not find that recipe. Please try another one!';
+    #successMessage = 'Start by searching for a recipe or an ingredient. Have fun!';
 
     
     //PUBLIC function
@@ -17,7 +19,7 @@ class RecipeView{
     }
 
     //283
-    renderSpinner = function(){
+    renderSpinner(){
         const markup = `
           <div class="spinner">
             <svg>
@@ -26,9 +28,48 @@ class RecipeView{
           </div>
           `;
       
-        this.#parentElement.innerHTML = "";
+        this.#clear();
         this.#parentElement.insertAdjacentHTML('afterbegin', markup);
       };
+
+    //288 Event Handlers in MVC: Publisher-Subscriber Pattern
+    //Publisher
+    addHandlerRender(handler){
+        //copy from controller.js
+        // ['hashchange', 'load'].forEach(ev => window.addEventListener(ev, controlRecipes));
+        ['hashchange', 'load'].forEach(ev => window.addEventListener(ev, handler));
+    };
+
+    renderError(message = this.#errorMessage){
+        const markup = `<div class="error">
+                            <div>
+                                <svg>
+                                    <use href="${icons}#icon-alert-triangle"></use>
+                                </svg>
+                            </div>
+                            <p>${message}</p>
+                        </div>`
+
+        this.#clear();
+        this.#parentElement.insertAdjacentHTML('afterbegin', markup);
+    };
+
+    renderMessage(message = this.#successMessage){
+      const markup = `<div class="recipe">
+                        <div class="message">
+                          <div>
+                            <svg>
+                              <use href="${icons}#icon-smile"></use>
+                            </svg>
+                          </div>
+                          <p>${message}</p>
+                      </div>`
+
+      this.#clear();
+      this.#parentElement.insertAdjacentHTML('afterbegin', markup);
+  };
+
+
     
 
     //PRIVATE functions
