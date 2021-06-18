@@ -1,4 +1,3 @@
-
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
@@ -7,17 +6,6 @@ import * as model from './model.js';
 //import from view
 import recipeView from './views/recipeView.js';
 
-
-const recipeContainer = document.querySelector('.recipe');
-
-const timeout = function (s) {
-  return new Promise(function (_, reject) {
-    setTimeout(function () {
-      reject(new Error(`Request took too long! Timeout after ${s} second`));
-    }, s * 1000);
-  });
-};
-
 //api website: https://forkify-api.herokuapp.com/v2
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -25,12 +13,10 @@ const timeout = function (s) {
 //283 Rendering Recipe (step2)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//fetch data from API
 const controlRecipes = async function () {
   try {
     //***284 get the id from URL
     const id = window.location.hash.slice(1); //window.location = url, hash = #
-    console.log(id);
     if(!id) return; //guard
 
     //Step 0: render spinner
