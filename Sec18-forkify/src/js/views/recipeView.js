@@ -8,7 +8,14 @@ class RecipeView{
     #data;
     #errorMessage = 'We could not find that recipe. Please try another one!';
     #successMessage = 'Start by searching for a recipe or an ingredient. Have fun!';
-
+    
+    //288 Event Handlers in MVC: Publisher-Subscriber Pattern
+    //Publisher
+    addHandlerRender(handler){
+        //copy from controller.js
+        // ['hashchange', 'load'].forEach(ev => window.addEventListener(ev, controlRecipes));
+        ['hashchange', 'load'].forEach(ev => window.addEventListener(ev, handler));
+    };
     
     //PUBLIC function
     render(data){
@@ -32,13 +39,6 @@ class RecipeView{
         this.#parentElement.insertAdjacentHTML('afterbegin', markup);
       };
 
-    //288 Event Handlers in MVC: Publisher-Subscriber Pattern
-    //Publisher
-    addHandlerRender(handler){
-        //copy from controller.js
-        // ['hashchange', 'load'].forEach(ev => window.addEventListener(ev, controlRecipes));
-        ['hashchange', 'load'].forEach(ev => window.addEventListener(ev, handler));
-    };
 
     renderError(message = this.#errorMessage){
         const markup = `<div class="error">

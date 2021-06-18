@@ -5,6 +5,7 @@ import 'regenerator-runtime/runtime';
 import * as model from './model.js';
 //import from view
 import recipeView from './views/recipeView.js';
+import searchView from './views/searchView.js';
 
 //api website: https://forkify-api.herokuapp.com/v2
 
@@ -27,7 +28,7 @@ const controlRecipes = async function () {
     const { recipe } = model.state;
 
     //Step 2: Rendering Recipe
-    recipeView.render(model.state.recipe);
+    recipeView.render(recipe);
     
   } catch (err) {
     // console.log(err);
@@ -35,6 +36,24 @@ const controlRecipes = async function () {
     console.error(err);
   }
 };
+
+const controlSearchResults = async function(){
+  try {
+    //1) Get search query
+    const query = searchView.getQuery();
+    if(!query) return;
+
+    //2) Load search results
+    await model.loadSearchResults(query);
+
+    //3) Render results
+    console.log(model.state.search.results);
+  } catch (error) {
+    console.log(error);
+  }
+}
+// controlSearchResults();
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //284 Listening For Load and Hashchange Events
@@ -47,9 +66,10 @@ const controlRecipes = async function () {
 // ['hashchange', 'load'].forEach(ev => window.addEventListener(ev, controlRecipes));
 
 //287 Implement Publisher-Subscriber Pattern
-//Subscriber
+//Subscribers
 const init = function(){
   recipeView.addHandlerRender(controlRecipes);
+  searchView.addHandlerSearch(controlSearchResults);
 };
 
 init();
