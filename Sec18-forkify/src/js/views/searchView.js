@@ -1,25 +1,28 @@
-class searchView{
-    #parentEl = document.querySelector('.search');
-    #btn = document.querySelector('.search__btn');
+import View from './View.js';
+
+class searchView extends View{
+    _parentEl = document.querySelector('.search');
+    _btn = document.querySelector('.search__btn');
     
     //Public Functions
     getQuery(){
         // return document.querySelector('.search__field').value;
-        const query = this.#parentEl.querySelector('.search__field').value;
-        this.#clearInput();
+        // const query = this._parentEl.querySelector('.search__field').value;
+        const query = document.querySelector('.search__field').value;
+        this._clearInput();
         return query;
     };
     
     //Publisher
     addHandlerSearch(handler){
-        this.#parentEl.addEventListener('submit', function(e){
+        this._parentEl.addEventListener('submit', function(e){
             e.preventDefault();
             handler();
         });
     };
 
-    #clearInput(){
-        this.#parentEl.querySelector('.search__field').value = '';
+    _clearInput(){
+        this._parentEl.querySelector('.search__field').value = '';
     };
 }
 
