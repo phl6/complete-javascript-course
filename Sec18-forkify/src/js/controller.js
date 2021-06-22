@@ -37,8 +37,11 @@ const controlRecipes = async function () {
     const { recipe } = model.state;
 
     //Step 2: Rendering Recipe
-    recipeView.render(recipe);
+    recipeView.render(model.state.recipe);
+    console.log(model.state.recipe);
     
+    //TEST
+    // controlServings();
   } catch (err) {
     // console.log(err);
     recipeView.renderError();
@@ -48,7 +51,7 @@ const controlRecipes = async function () {
 
 const controlSearchResults = async function(){
   try {
-    //0) render Spinner
+    //0) Render Spinner
     resultsView.renderSpinner();
     // console.log(resultsView);
 
@@ -60,8 +63,6 @@ const controlSearchResults = async function(){
     await model.loadSearchResults(query);
 
     //3) Render results
-    // console.log(model.state.search.results);
-    // resultsView.render(model.state.search.results);
     resultsView.render(model.getSearchResultsPage(1));
 
     console.log(model.state.search);
@@ -71,36 +72,35 @@ const controlSearchResults = async function(){
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 const controlPagination = function(goToPage){
   console.log(goToPage);
 
-  //3) Render NEW results
+  //1) Render NEW results
   resultsView.render(model.getSearchResultsPage(goToPage));
-  //4) Render NEW Pagination buttons
+  //2) Render NEW Pagination buttons
   paginationView.render(model.state.search);
+};
 
+const controlServings = function(newServings){
+  //Update the recipe servings (in state)
+  model.updateServings(newServings);
+
+  //Update the recipe view
+  recipeView.render(model.state.recipe);
+  
 }
 
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//284 Listening For Load and Hashchange Events
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//listen to the change of url's #
-// window.addEventListener('hashchange', showRecipe);
-// window.addEventListener('load', showRecipe);
-
-//combine above 2 eventListners
-// ['hashchange', 'load'].forEach(ev => window.addEventListener(ev, controlRecipes));
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //287 Implement Publisher-Subscriber Pattern
 //Subscribers
 const init = function(){
   recipeView.addHandlerRender(controlRecipes);
+  recipeView.addHandlerUpdateServings(controlServings);
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
+  // controlServings();
 };
 
 init();

@@ -18,6 +18,19 @@ class RecipeView extends View{
     // ['hashchange', 'load'].forEach(ev => window.addEventListener(ev, controlRecipes));
     ['hashchange', 'load'].forEach(ev => window.addEventListener(ev, handler));
   };
+
+  addHandlerUpdateServings(handler){
+
+    this._parentElement.addEventListener('click', function(e){
+      const btn = e.target.closest('.btn--update-servings');
+      if(!btn) return;
+      
+      //get the data from self-defined dataset
+      const {updateTo} = btn.dataset;
+      //passing the update serving to controller then to model then back to recipeView to re-render the page
+      if(+updateTo > 0) handler(+updateTo);
+    });
+  }
   
   //PRIVATE functions    
   _generateMarkup(){
@@ -46,12 +59,12 @@ class RecipeView extends View{
                 <span class="recipe__info-text">servings</span>
 
                 <div class="recipe__info-buttons">
-                  <button class="btn--tiny btn--increase-servings">
+                  <button class="btn--tiny btn--update-servings" data-update-to = "${this._data.servings - 1}">
                     <svg>
                       <use href="${icons}#icon-minus-circle"></use>
                     </svg>
                   </button>
-                  <button class="btn--tiny btn--increase-servings">
+                  <button class="btn--tiny btn--update-servings" data-update-to = "${this._data.servings + 1}">
                     <svg>
                       <use href="${icons}#icon-plus-circle"></use>
                     </svg>
@@ -94,7 +107,7 @@ class RecipeView extends View{
               </a>
             </div>
             `;
-  }
+  };
 
   _generateMarkupIngredient(ing){
       return `<li class="recipe__ingredient">
@@ -109,7 +122,7 @@ class RecipeView extends View{
                       ${ing.description}
                   </div>
               </li>`
-  }
+  };
 }
 
 export default new RecipeView();
