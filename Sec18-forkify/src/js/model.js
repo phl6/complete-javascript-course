@@ -59,8 +59,6 @@ export const loadSearchResults = async function(query){
   }
 };
 
-// loadSearchResults('pizza');
-
 export const getSearchResultsPage = function(page = state.search.page){
   state.search.page = page; //store a variable in state
   //setting the range of displayed items
